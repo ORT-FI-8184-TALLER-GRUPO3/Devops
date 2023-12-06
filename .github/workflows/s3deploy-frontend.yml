@@ -36,7 +36,7 @@ jobs:
       #- run: yarn test
      
       - name: Build Angular App
-        run: ./.github/scripts/build.sh
+        run: ORT-FI-8184-TALLER-GRUPO3/angular/.github/scripts/build.sh
         shell: bash
         env:
           CI_ENV: ${{ inputs.CI_ENV }}
@@ -52,7 +52,7 @@ jobs:
           aws-region: ${{secrets.AWS_DEFAULT_REGION}}
 
       - name: S3 Deploy
-        run: ./.github/scripts/deploy.sh
+        run: ORT-FI-8184-TALLER-GRUPO3/angular/.github/scripts/deploy.sh
         shell: bash
         env:
           S3_ORIGIN_BUCKET: ${{ secrets.S3_ORIGIN_BUCKET }}
