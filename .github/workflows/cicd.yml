@@ -31,6 +31,6 @@ jobs:
       run: mvn -B package --file ${{ inputs.pom_path }}
 
     - name: Build Docker Image
-      run: docker build -t "$(echo "${{ inputs.service }}" | tr '[:upper:]' '[:lower:]')-$(echo "${{ inputs.target  }}" | tr '[:upper:]' '[:lower:]'):$(echo "${{ github.sha }}" | tr '[:upper:]' '[:lower:]')” .
+      run: docker build -t "$(echo "${{ inputs.service }}-${{ inputs.target }}:${{ github.sha }}" | tr '[:upper:]' '[:lower:]')" .
 
 
