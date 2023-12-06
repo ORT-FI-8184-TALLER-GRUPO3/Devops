@@ -1,18 +1,18 @@
 name: Github Action Frontend
 
 on:
-  push:
-    branches:
-      - Dev
-      - Test
-      - Prod
-  pull_request:
-    types: [opened, synchronize, reopened]
-  workflow_dispatch:
-
-concurrency:
-  group: environment-${{ github.ref }}
-  cancel-in-progress: true
+  workflow_call:
+    inputs:
+      service:
+        required: false
+        type: string
+      target:
+        required: false
+        type: string
+      pom_path:
+        required: false
+        type: string
+        default: './pom.xml' 
 
 jobs:
   SonarTest:
