@@ -15,7 +15,12 @@ on:
         default: './pom.xml' 
 
 jobs:
+  SonarTest:
+    uses: ./.github/workflows/sonarscan.yml
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   build-and-deploy:
+    needs: SonarTest
     runs-on: ubuntu-latest
 
     steps:
