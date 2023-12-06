@@ -35,7 +35,7 @@ jobs:
         run: echo "CI_ENV=${{ matrix.environment }}" >> $GITHUB_ENV
 
       - name: Build and Deploy
-        uses: ./.github/workflows/deploy-to-s3.yml
+        uses: ./.github/workflows/s3deploy-frontend.yml
         with:
           CI_ENV: ${{ env.CI_ENV }}
           CONTENTFUL_ENVIRONMENT: ${{ env.CI_ENV }}
