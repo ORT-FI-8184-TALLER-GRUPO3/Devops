@@ -23,9 +23,6 @@ jobs:
   build-and-deploy:
     needs: SonarTest
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        environment: [Dev, Test, Prod]
 
     steps:
       - name: Checkout Repository
