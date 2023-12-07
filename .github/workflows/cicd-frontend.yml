@@ -30,7 +30,10 @@ jobs:
 
       - name: Set up Environment Variables
         run: echo "CI_ENV=${{ matrix.environment }}" >> $GITHUB_ENV
-
+        
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        
       - name: Build and Deploy
         uses: ./.github/workflows/s3deploy-frontend.yml
         with:
