@@ -52,7 +52,7 @@ jobs:
           aws-region: ${{secrets.AWS_DEFAULT_REGION}}
 
       - name: S3 Deploy
-        run: ORT-FI-8184-TALLER-GRUPO3/angular/.github/scripts/deploy.sh
+        run: ./.github/scripts/deploy.sh
         shell: bash
         env:
           S3_ORIGIN_BUCKET: ${{ secrets.S3_ORIGIN_BUCKET }}
