@@ -32,7 +32,7 @@ jobs:
         run: echo "CI_ENV=${{ matrix.environment }}" >> $GITHUB_ENV
 
       - name: Build and Deploy
-        uses: ./.github/workflows/s3deploy-frontend.yml
+        uses: ORT-FI-8184-TALLER-GRUPO3/Devops/.github/workflows/s3deploy-frontend.yml@${{ env.CI_ENV }}
         with:
           CI_ENV: ${{ env.CI_ENV }}
           branch_name: ${{ env.NAME }}
