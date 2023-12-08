@@ -15,7 +15,7 @@ data "aws_ecs_task_execution" "example" {
 
 resource "aws_ecs_service" "pruebaServicio" {
   name            = "ServicioPagos"
-  cluster         = aws_ecs_cluster.ecs_cluster_dev.id
+  cluster         = aws_ecs_cluster.ecs_cluster.id
   #aws-ecr-nginx-ecs-fargate-td
   #task_definition = "arn:aws:ecs:us-east-1:556390483751:task-definition/aws-ecr-nginx-ecs-fargate-td:1"
   
@@ -40,8 +40,8 @@ resource "aws_ecs_service" "pruebaServicio" {
   }
 */
   network_configuration {
-    subnets          = aws_subnet.vpc-dev-public-subnet-1[*].id
-    security_groups  = [aws_security_group.dev-vpc-sg.id]
+    subnets          = aws_subnet.vpc-ecs-public-subnet-1[*].id
+    security_groups  = [aws_security_group.ecs-vpc-sg.id]
     assign_public_ip = true
   }
   /*

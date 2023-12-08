@@ -1,51 +1,51 @@
 # Resource Block
 # Resource-1: Crear VPC
-resource "aws_vpc" "vpc-dev" {
+resource "aws_vpc" "vpc-ecs" {
   cidr_block = "10.0.0.0/16"
 
   tags = {
-    "Name" = "vpc-dev"
+    "Name" = "${var.environment_prefix}-vpc"
   }
 }
 
 # Resource-2: Crear Subnets
-resource "aws_subnet" "vpc-dev-public-subnet-1" {
-  vpc_id = aws_vpc.vpc-dev.id
+resource "aws_subnet" "vpc-ecs-public-subnet-1" {
+  vpc_id = aws_vpc.vpc-ecs.id
   cidr_block = "10.0.1.0/24"
-  availability_zone = "us-east-1a"
+  availability_zone = var.availability_zone_1
   map_public_ip_on_launch = true
 }
 
 
 # Resource-3: Crear Internet Gateway
-resource "aws_internet_gateway" "vpc-dev-igw" {
-  vpc_id = aws_vpc.vpc-dev.id
+resource "aws_internet_gateway" "vpc-ecs-igw" {
+  vpc_id = aws_vpc.vpc-ecs.id
 }
 
 # Resource-4: Crear Route Table
-resource "aws_route_table" "vpc-dev-public-route-table" {
-  vpc_id = aws_vpc.vpc-dev.id
+resource "aws_route_table" "vpc-ecs-public-route-table" {
+  vpc_id = aws_vpc.vpc-ecs.id
 }
 
 # Resource-5: Crear Route en Route Table para acceso a internet
-resource "aws_route" "vpc-dev-public-route" {
-  route_table_id = aws_route_table.vpc-dev-public-route-table.id 
+resource "aws_route" "vpc-ecs-public-route" {
+  route_table_id = aws_route_table.vpc-ecs-public-route-table.id 
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id = aws_internet_gateway.vpc-dev-igw.id 
+  gateway_id = aws_internet_gateway.vpc-ecs-igw.id 
 }
 
 
 # Resource-6: Asociar Route Table con la Subnet
-resource "aws_route_table_association" "vpc-dev-public-route-table-associate" {
-  route_table_id = aws_route_table.vpc-dev-public-route-table.id 
-  subnet_id = aws_subnet.vpc-dev-public-subnet-1.id
+resource "aws_route_table_association" "vpc-ecs-public-route-table-associate" {
+  route_table_id = aws_route_table.vpc-ecs-public-route-table.id 
+  subnet_id = aws_subnet.vpc-ecs-public-subnet-1.id
 }
 
 # Resource-7: Crear Security Group
-resource "aws_security_group" "dev-vpc-sg" {
-  name = "dev-vpc-default-sg"
-  vpc_id = aws_vpc.vpc-dev.id
-  description = "Dev VPC Default Security Group"
+resource "aws_security_group" "ecs-vpc-sg" {
+  name = "${var.environment_prefix}-vpc-default-sg"
+  vpc_id = aws_vpc.vpc-ecs.id
+  description = "${var.environment_name} - VPC Default Security Group"
 
   ingress {
     description = "Allow Port 22"

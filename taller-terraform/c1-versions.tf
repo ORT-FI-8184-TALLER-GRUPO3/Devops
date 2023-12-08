@@ -17,6 +17,7 @@ terraform {
     # For State Locking
     dynamodb_table = "terraform-dev-state-table"
   }
+# Fin Adding Backend for Remote Statye Storage
 }
 
 # Provider Block
