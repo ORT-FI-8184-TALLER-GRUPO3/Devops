@@ -42,7 +42,10 @@ jobs:
       run: mvn -B package --file ${{ inputs.pom_path }} -DskipTests
 
     - name: Build Docker Image
-      run: docker build -t "${{ inputs.service }}-${{ inputs.target }}:${{ github.sha }}" .
+      run: |
+        IMAGE_NAME=$(echo "${{ inputs.service }}-${{ inputs.target }}:${{ github.sha }}" | tr '[:upper:]' '[:lower:]')
+        docker build -t $IMAGE_NAME .
+        echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
 
     # Configurar AWS Credentials
     - name: Configure AWS credentials
@@ -59,19 +62,21 @@ jobs:
     # Subir la imagen a ECR
     - name: Build, tag, and push image to Amazon ECR
       run: |
-        docker tag "${{ inputs.service }}-${{ inputs.target }}:${{ github.sha }}" ${{ secrets.AWS_ECR_REGISTRY }}/${{ inputs.service }}:${{ github.sha }}
-        docker push ${{ secrets.AWS_ECR_REGISTRY }}/${{ inputs.service }}:${{ github.sha }}
+        docker tag $IMAGE_NAME ${{ secrets.AWS_ECR_REGISTRY }}/$IMAGE_NAME
+        docker push ${{ secrets.AWS_ECR_REGISTRY }}/$IMAGE_NAME
 
     # Actualizar la definición de tarea con la nueva imagen
     - name: Fill in the new image ID in the Amazon ECS task definition
+      id: task-def # Aquí se define el ID del paso para referenciarlo más adelante
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
         task-definition: deploy/task-definition.json
         container-name: ${{ inputs.service }}
-        image: ${{ secrets.AWS_ECR_REGISTRY }}/${{ inputs.service }}:${{ github.sha }}
+        image: ${{ secrets.AWS_ECR_REGISTRY }}/$IMAGE_NAME
 
     # Desplegar la tarea en ECS
     - name: Deploy to Amazon ECS
+      if: ${{ success() }} # Aseguramos que solo se ejecuta si todos los pasos anteriores fueron exitosos
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
