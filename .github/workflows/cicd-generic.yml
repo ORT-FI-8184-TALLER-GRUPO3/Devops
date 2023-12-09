@@ -24,6 +24,7 @@ jobs:
       SONAR_PROJECT: ${{ inputs.SONAR_PROJECT }}  
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
   build-and-deploy:
     needs: SonarTest
     runs-on: ubuntu-latest
@@ -41,4 +42,41 @@ jobs:
       run: mvn -B package --file ${{ inputs.pom_path }} -DskipTests
 
     - name: Build Docker Image
-      run: docker build -t "$(echo "${{ inputs.service }}-${{ inputs.target }}:${{ github.sha }}" | tr '[:upper:]' '[:lower:]')" .
+      run: docker build -t "${{ inputs.service }}-${{ inputs.target }}:${{ github.sha }}" .
+
+    # Configurar AWS Credentials
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+
+    # Login a Amazon ECR
+    - name: Login to Amazon ECR
+      uses: aws-actions/amazon-ecr-login@v1
+
+    # Subir la imagen a ECR
+    - name: Build, tag, and push image to Amazon ECR
+      run: |
+        docker tag "${{ inputs.service }}-${{ inputs.target }}:${{ github.sha }}" ${{ secrets.AWS_ECR_REGISTRY }}/${{ inputs.service }}:${{ github.sha }}
+        docker push ${{ secrets.AWS_ECR_REGISTRY }}/${{ inputs.service }}:${{ github.sha }}
+
+    # Actualizar la definición de tarea con la nueva imagen
+    - name: Fill in the new image ID in the Amazon ECS task definition
+      uses: aws-actions/amazon-ecs-render-task-definition@v1
+      with:
+        task-definition: deploy/task-definition.json
+        container-name: ${{ inputs.service }}
+        image: ${{ secrets.AWS_ECR_REGISTRY }}/${{ inputs.service }}:${{ github.sha }}
+
+    # Desplegar la tarea en ECS
+    - name: Deploy to Amazon ECS
+      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      with:
+        task-definition: ${{ steps.task-def.outputs.task-definition }}
+        service: ${{ inputs.service }}
+        cluster: BackendCluster
+        wait-for-service-stability: true
+
+    
