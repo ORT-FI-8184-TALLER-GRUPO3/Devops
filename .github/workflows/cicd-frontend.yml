@@ -36,7 +36,7 @@ jobs:
     name: DeployToS3
     uses: ./.github/workflows/s3deploy-frontend.yml
     with:
-      CI_ENV: ${{ env.CI_ENV }}
+      CI_ENV: ${{ github.event.inputs.environment }}
       CONTENTFUL_ENVIRONMENT: ${{ env.CI_ENV }}
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
