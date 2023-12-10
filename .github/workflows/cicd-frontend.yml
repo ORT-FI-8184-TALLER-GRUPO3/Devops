@@ -1,47 +1,42 @@
-name: Github Action Frontend
+name: Github Action Workflow DEV
 
 on:
   workflow_call:
+    inputs:
+      branchname:
+        description: 'Branch name for CI_ENV'
+        required: true
 
 jobs:
-  build:
+  SonarTest:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repo
+      - name: Set Branch Name
+        run: echo "CI_ENV=${{ inputs.branchname }}" >> $GITHUB_ENV
+
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: Run SonarQube Analysis
+        uses: ./.github/workflows/sonarscan.yml
+        secrets:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  build-dev:
+    needs: SonarTest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Branch Name
+        run: echo "CI_ENV=${{ inputs.branchname }}" >> $GITHUB_ENV
+
+      - name: Deploy to S3
+        uses: ./.github/workflows/deploy-to-s3.yml
         with:
-          node-version: '14'
-
-      - name: Install dependencies
-        run: npm install
-      
-      - name: Test code
-        run: npm run test
-
-      - name: Build app
-        run: npm run build
-        
-  AnalisisSonarQube:
-    needs: build
-    uses: ./.github/workflows/sonarscan-frontend.yml
-    secrets:
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        
-  DeployToS3:
-    needs: AnalisisSonarQube
-    name: DeployToS3
-    
-    uses: ./.github/workflows/s3deploy-frontend.yml
-    with:
-      CI_ENV: ${{ env.CI_ENV }}
-      CONTENTFUL_ENVIRONMENT: ${{ env.CI_ENV }}
-    secrets:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN}}
-      AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-      S3_ORIGIN_BUCKET: ${{secrets.S3_ORIGIN_BUCKET}}
+          CI_ENV: ${{ inputs.branchname }}
+          CONTENTFUL_ENVIRONMENT: ${{ inputs.branchname }}
+        secrets:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
+          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+          S3_ORIGIN_BUCKET: ${{ secrets["S3_ORIGIN_BUCKET_" + inputs.branchname] }}
