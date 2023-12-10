@@ -4,7 +4,7 @@
   "containerDefinitions": [
     {
       "name": "products-service-example",
-      "image": "<ecr_registry_url>/products-service-example:latest",
+      "image": "${ECR_REGISTRY_URL}/products-service-example:${IMAGE_TAG}",
       "essential": true,
       "memory": 512,
       "cpu": 256,
@@ -15,9 +15,9 @@
         }
       ]
     },
-    {
+  {
       "name": "shipping-service-example",
-      "image": "<ecr_registry_url>/shipping-service-example:latest",
+      "image": "${ECR_REGISTRY_URL}/shipping-service-example:${IMAGE_TAG}",
       "essential": true,
       "memory": 512,
       "cpu": 256,
@@ -30,7 +30,7 @@
     },
     {
       "name": "payments-service-example",
-      "image": "<ecr_registry_url>/payments-service-example:latest",
+      "image": "${ECR_REGISTRY_URL}/payments-service-example:${IMAGE_TAG}",
       "essential": true,
       "memory": 512,
       "cpu": 256,
@@ -43,7 +43,7 @@
     },
     {
       "name": "orders-service-example",
-      "image": "<ecr_registry_url>/orders-service-example:latest",
+      "image": "${ECR_REGISTRY_URL}/orders-service-example:${IMAGE_TAG}",
       "essential": true,
       "memory": 512,
       "cpu": 256,
