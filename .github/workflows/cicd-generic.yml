@@ -72,9 +72,9 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
      # Agarro la definición de tarea de aws
-    - name: Download task definition
-      run: |
-        aws ecs describe-task-definition --task-definition backend-services:1 --query taskDefinition > ./deploy/task-definition.json
+    #- name: Download task definition
+     # run: |
+      #  aws ecs describe-task-definition --task-definition backend-services:1 --query taskDefinition > ./deploy/task-definition.json
 
     # Actualizar la definición de tarea con la nueva imagen
     - name: Fill in the new image ID in the Amazon ECS task definition
