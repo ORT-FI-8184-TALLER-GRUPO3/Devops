@@ -60,7 +60,7 @@ jobs:
     # Subir la imagen a ECR
     - name: Build, tag, and push image to Amazon ECR
       run: |
-        docker build -t "${{ secrets.AWS_ECR_REGISTRY }}/${{ inputs.service }}:${{ github.sha }}" .
+        docker tag "${{ inputs.service }}-${{ inputs.target }}:${{ github.sha }}" "${{ secrets.AWS_ECR_REGISTRY }}/${{ inputs.service }}:${{ github.sha }}"
         docker push "${{ secrets.AWS_ECR_REGISTRY }}/${{ inputs.service }}:${{ github.sha }}"
 
     # Actualizar la definición de tarea con la nueva imagen
