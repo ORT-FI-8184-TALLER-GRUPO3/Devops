@@ -1,0 +1,62 @@
+{
+  "family": "backend-services",
+  "networkMode": "awsvpc",
+  "containerDefinitions": [
+    {
+      "name": "products-service-example",
+      "image": "<ecr_registry_url>/products-service-example:latest",
+      "essential": true,
+      "memory": 512,
+      "cpu": 256,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 80
+        }
+      ]
+    },
+    {
+      "name": "shipping-service-example",
+      "image": "<ecr_registry_url>/shipping-service-example:latest",
+      "essential": true,
+      "memory": 512,
+      "cpu": 256,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 80
+        }
+      ]
+    },
+    {
+      "name": "payments-service-example",
+      "image": "<ecr_registry_url>/payments-service-example:latest",
+      "essential": true,
+      "memory": 512,
+      "cpu": 256,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 80
+        }
+      ]
+    },
+    {
+      "name": "orders-service-example",
+      "image": "<ecr_registry_url>/orders-service-example:latest",
+      "essential": true,
+      "memory": 512,
+      "cpu": 256,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 80
+        }
+      ]
+    }
+  ],
+  "requiresCompatibilities": ["FARGATE"],
+  "memory": "4GB",
+  "cpu": "1024"
+}
+
