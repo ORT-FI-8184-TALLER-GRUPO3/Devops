@@ -60,8 +60,8 @@ jobs:
     # Subir la imagen a ECR
     - name: Build, tag, and push image to Amazon ECR
       run: |
-        docker build -t "${{ secrets.AWS_ECR_REGISTRY }}/${{ inputs.service }}:${{ inputs.target }}
-        docker push "${{ secrets.AWS_ECR_REGISTRY }}/${{ inputs.service }}:${{ inputs.target }}
+        docker build -t ${{ secrets.AWS_ECR_REGISTRY }}/${{ inputs.service }}:${{ inputs.target }} .
+        docker push ${{ secrets.AWS_ECR_REGISTRY }}/${{ inputs.service }}:${{ inputs.target }}
 
     # Actualizar la definición de tarea con la nueva imagen
     - name: Fill in the new image ID in the Amazon ECS task definition
