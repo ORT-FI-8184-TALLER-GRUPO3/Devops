@@ -1,63 +1,99 @@
 {
-  "family": "backend-services",
-  "networkMode": "awsvpc",
-  "containerDefinitions": [
-    {
-      "name": "products-service-example",
-      "image": "<ecr_registry_url>/products-service-example:latest",
-      "essential": true,
-      "memory": 512,
-      "cpu": 256,
-      "portMappings": [
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:848436986669:task-definition/backend-services:1",
+    "containerDefinitions": [
         {
-          "containerPort": 80,
-          "hostPort": 80
-        }
-      ]
-    },
-    {
-      "name": "shipping-service-example",
-      "image": "<ecr_registry_url>/shipping-service-example:latest",
-      "essential": true,
-      "memory": 512,
-      "cpu": 256,
-      "portMappings": [
+            "name": "products-service-example",
+            "image": "ecr_registry_url/products-service-example:latest",
+            "cpu": 256,
+            "memory": 512,
+            "portMappings": [
+                {
+                    "containerPort": 8080,
+                    "hostPort": 8080,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [],
+            "mountPoints": [],
+            "volumesFrom": []
+        },
         {
-          "containerPort": 80,
-          "hostPort": 80
-        }
-      ]
-    },
-    {
-      "name": "payments-service-example",
-      "image": "<ecr_registry_url>/payments-service-example:latest",
-      "essential": true,
-      "memory": 512,
-      "cpu": 256,
-      "portMappings": [
+            "name": "shipping-service-example",
+            "image": "ecr_registry_url/shipping-service-example:latest",
+            "cpu": 256,
+            "memory": 512,
+            "portMappings": [
+                {
+                    "containerPort": 8081,
+                    "hostPort": 8081,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [],
+            "mountPoints": [],
+            "volumesFrom": []
+        },
         {
-          "containerPort": 80,
-          "hostPort": 80
-        }
-      ]
-    },
-    {
-      "name": "orders-service-example",
-      "image": "<ecr_registry_url>/orders-service-example:latest",
-      "essential": true,
-      "memory": 512,
-      "cpu": 256,
-      "portMappings": [
+            "name": "payments-service-example",
+            "image": "ecr_registry_url/payments-service-example:latest",
+            "cpu": 256,
+            "memory": 512,
+            "portMappings": [
+                {
+                    "containerPort": 8082,
+                    "hostPort": 8082,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [],
+            "mountPoints": [],
+            "volumesFrom": []
+        },
         {
-          "containerPort": 80,
-          "hostPort": 80
+            "name": "orders-service-example",
+            "image": "ecr_registry_url/orders-service-example:latest",
+            "cpu": 256,
+            "memory": 512,
+            "portMappings": [
+                {
+                    "containerPort": 8083,
+                    "hostPort": 8083,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [],
+            "mountPoints": [],
+            "volumesFrom": []
         }
-      ]
-    }
-  ],
-  "requiresCompatibilities": ["FARGATE"],
-  "memory": "4GB",
-  "cpu": "1024"
+    ],
+    "family": "backend-services",
+    "networkMode": "awsvpc",
+    "revision": 1,
+    "volumes": [],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "1024",
+    "memory": "4096",
+    "registeredAt": "2023-12-10T18:32:04.834Z",
+    "registeredBy": "arn:aws:sts::848436986669:assumed-role/voclabs/user2790966=maximigues@gmail.com",
+    "tags": []
 }
-
-
