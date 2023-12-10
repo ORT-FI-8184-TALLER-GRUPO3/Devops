@@ -2,24 +2,13 @@ name: Github Action Frontend
 
 on:
   workflow_call:
-    inputs:
-      service:
-        required: false
-        type: string
-      target:
-        required: false
-        type: string
-      pom_path:
-        required: false
-        type: string
-        default: './pom.xml' 
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repo
         uses: actions/checkout@v2
 
       - name: Set up Node.js
@@ -38,30 +27,20 @@ jobs:
         
   AnalisisSonarQube:
     needs: build
-    name: AnalisisSonarQube
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Set Branch Input
-        id: set_branch
-        run: echo "BRANCH_NAME=${{ github.event.inputs.branch_name }}" >> $GITHUB_ENV
-
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Run SonarQube Analysis
-        run: ./sonar-scan.sh ${{ env.BRANCH_NAME }}
+    uses: ./.github/workflows/sonarscan-frontend.yml
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         
   DeployToS3:
     needs: AnalisisSonarQube
     name: DeployToS3
-    uses: ./.github/workflows/deploy-to-s3.yml
+    uses: ./.github/workflows/s3deploy-frontend.yml
     with:
-      CI_ENV: Prod
-      CONTENTFUL_ENVIRONMENT: 'Prod'
+      CI_ENV: ${{ env.CI_ENV }}
+      CONTENTFUL_ENVIRONMENT: ${{ env.CI_ENV }}
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN}}
       AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-      S3_ORIGIN_BUCKET: ${{ secrets.S3_ORIGIN_BUCKET_PROD }}
+      S3_ORIGIN_BUCKET: ${{ secrets["S3_ORIGIN_BUCKET_" + env.CI_ENV] }}
