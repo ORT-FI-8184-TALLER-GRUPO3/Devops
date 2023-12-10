@@ -41,8 +41,8 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file ${{ inputs.pom_path }} -DskipTests
 
-    - name: Build Docker Image
-      run:  docker build -t "${{ inputs.service }}-${{ inputs.target }}:${{ github.sha }}" .
+  #  - name: Build Docker Image
+   #   run:  docker build -t "${{ inputs.service }}-${{ inputs.target }}:${{ github.sha }}" .
 
     # Configurar AWS Credentials
     - name: Configure AWS credentials
@@ -60,8 +60,8 @@ jobs:
     # Subir la imagen a ECR
     - name: Build, tag, and push image to Amazon ECR
       run: |
-        docker tag "${{ inputs.service }}-${{ inputs.target }}:${{ github.sha }}" "${{ secrets.AWS_ECR_REGISTRY }}/${{ inputs.service }}:${{ github.sha }}"
-        docker push "${{ secrets.AWS_ECR_REGISTRY }}/${{ inputs.service }}:${{ github.sha }}"
+        docker build -t "${{ secrets.AWS_ECR_REGISTRY }}/${{ inputs.service }}:${{ inputs.target }}
+        docker push "${{ secrets.AWS_ECR_REGISTRY }}/${{ inputs.service }}:${{ inputs.target }}
 
     # Actualizar la definición de tarea con la nueva imagen
     - name: Fill in the new image ID in the Amazon ECS task definition
@@ -70,7 +70,7 @@ jobs:
       with:
         task-definition: deploy/task-definition.json
         container-name: ${{ inputs.service }}
-        image: ${{ secrets.AWS_ECR_REGISTRY }}/${{ inputs.service }}:${{ github.sha }}
+        image: ${{ secrets.AWS_ECR_REGISTRY }}/${{ inputs.service }}:${{ inputs.target }}
 
     # Desplegar la tarea en ECS
     - name: Deploy to Amazon ECS
