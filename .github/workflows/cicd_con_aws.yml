@@ -125,7 +125,14 @@ jobs:
         task-definition: task-definitions/task-definition_pagos.json
         container-name: imagen_pagos
         image: ${{ steps.build-image.outputs.image }}
-      
+    
+    - name: Deploy Amazon ECS task definition
+      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      with:
+        task-definition: ${{ steps.task-def.outputs.task-definition }}
+        service: servicio_pagos
+        cluster: dev_ecs_cluster
+        wait-for-service-stability: true
 
     #- name: S3 Deploy
     #  run: ./.github/scripts/deploy.sh
