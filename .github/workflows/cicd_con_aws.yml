@@ -122,7 +122,7 @@ jobs:
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: ORT-FI-8184-TALLER-GRUPO3/Devops/task-definitions/task-definition_pagos.json@main
+        task-definition: task-definitions/task-definition_pagos.json
         container-name: github_container
         image: ${{ steps.build-image.outputs.image }}
       
