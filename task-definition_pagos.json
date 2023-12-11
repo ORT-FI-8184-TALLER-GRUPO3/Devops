@@ -1,0 +1,34 @@
+{
+    "family": "github_task_def",
+    "taskRoleArn": "arn:aws:iam::556390483751:role/LabRole",
+    "executionRoleArn": "arn:aws:iam::556390483751:role/LabRole",
+    "networkMode": "awsvpc",
+    "containerDefinitions": [
+        {
+            "name": "imagen_pagos",
+            "image": "556390483751.dkr.ecr.us-east-1.amazonaws.com/aws-ecr-nginx:imagen_pagos",
+            "repositoryCredentials": {
+                "credentialsParameter": ""
+            },
+            "cpu": 256,
+            "memory": 512,
+            "portMappings": [
+                {
+                    "containerPort": 8080,
+                    "hostPort": 8080,
+                    "protocol": "tcp",
+                    "name": "port_8080",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true
+        }
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "runtimePlatform": {
+        "cpuArchitecture": "LINUX",
+        "operatingSystemFamily": "X86_64"
+    }
+}
