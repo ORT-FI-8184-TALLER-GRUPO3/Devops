@@ -17,7 +17,7 @@ jobs:
   DeployToS3:
     name: DeployToS3
     needs: SonarQubeAnalisis
-    uses: ./.github/workflows/deploy-to-s3.yml
+    uses: ./.github/workflows/s3deploy-frontend.yml
     with:
       CI_ENV: ${{ inputs.branchname }}
       CONTENTFUL_ENVIRONMENT: ${{ inputs.branchname }}
