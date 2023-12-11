@@ -132,7 +132,7 @@ jobs:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
         service: ServicioPagos
         cluster: dev_ecs_cluster
-        wait-for-service-stability: true
+        wait-for-service-stability: false
 
     #- name: S3 Deploy
     #  run: ./.github/scripts/deploy.sh
