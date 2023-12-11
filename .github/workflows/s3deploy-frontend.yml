@@ -1,5 +1,4 @@
 name: Github Action S3 Deploy
-
 on:
   workflow_call:
     inputs:
@@ -26,39 +25,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
-          node-version: '14'
-
-      - name: Install dependencies
-        run: npm install
-      
-      - name: Test code
-        run: npm run test
-
-      - name: Build app
-        run: npm run build
-      
-      - name: Upload Artifact with JAR file
-        uses: actions/upload-artifact@v3
-        with:
-          name: "subida"
-          path: dist/
+          node-version: "14"
+      - run: yarn install --frozen-lockfile
+      - run: yarn lint
+      - run: yarn build
+      - run: yarn test
+     
+      - name: Build React App
+        run: ./.github/scripts/build.sh
+        shell: bash
+        env:
+          CI_ENV: ${{ inputs.CI_ENV }}
+          CONTENTFUL_ENVIRONMENT: ${{ inputs.CONTENTFUL_ENVIRONMENT }}
+          S3_ORIGIN_BUCKET: ${{ secrets.S3_ORIGIN_BUCKET }}
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
           aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN}}
           aws-region: ${{secrets.AWS_DEFAULT_REGION}}
 
       - name: S3 Deploy
         run: ORT-FI-8184-TALLER-GRUPO3/Webapp/.github/scripts/deploy.sh
         shell: bash
         env:
-          S3_ORIGIN_BUCKET: ${{ secrets.S3_ORIGIN_BUCKET }}
+          S3_ORIGIN_BUCKET: ${{ secrets.S3_ORIGIN_BUCKET}}
