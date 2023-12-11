@@ -104,6 +104,7 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
   
     - name: Build, tag, and push image to Amazon ECR
+      id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: ${{ inputs.ECR_REPOSITORY }}    
@@ -112,9 +113,17 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
-    
-    - name: S3 Deploy
-      run: ./.github/scripts/deploy.sh
-      shell: bash
-      env:
-        S3_ORIGIN_BUCKET: ${{ secrets.S3_ORIGIN_BUCKET }}
+    - name: Fill in the new image ID in the Amazon ECS task definition
+      id: task-def
+      uses: aws-actions/amazon-ecs-render-task-definition@v1
+      with:
+        task-definition: ./task-definition_pagos.json
+        container-name: github_container
+        image: ${{ steps.build-image.outputs.image }}
+      
+
+    #- name: S3 Deploy
+    #  run: ./.github/scripts/deploy.sh
+    #  shell: bash
+    #  env:
+    #    S3_ORIGIN_BUCKET: ${{ secrets.S3_ORIGIN_BUCKET }}
