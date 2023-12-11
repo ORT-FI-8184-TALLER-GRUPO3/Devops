@@ -9,6 +9,9 @@ on:
       CONTENTFUL_ENVIRONMENT:
         required: true
         type: string
+      bucketName:
+        required: true
+        type: string
     secrets:
       AWS_ACCESS_KEY_ID:
         required: true
@@ -54,7 +57,7 @@ jobs:
         env:
           CI_ENV: ${{ inputs.CI_ENV }}
           CONTENTFUL_ENVIRONMENT: ${{ inputs.CONTENTFUL_ENVIRONMENT }}
-          S3_ORIGIN_BUCKET: ${{ secrets.S3_ORIGIN_BUCKET }}
+          S3_ORIGIN_BUCKET: bucketName
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -67,7 +70,7 @@ jobs:
       - name: S3 Deploy
         run: |
           cd dist
-          aws s3 sync ./ s3://${{ secrets.S3_ORIGIN_BUCKET }}
+          aws s3 sync ./ s3://bucketName}
         shell: bash
         env:
-          S3_ORIGIN_BUCKET: ${{ secrets.S3_ORIGIN_BUCKET}}
+          S3_ORIGIN_BUCKET: bucketName
