@@ -26,14 +26,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-#      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: "14"
       - run: yarn install --frozen-lockfile
       - run: yarn lint
-      #- run: yarn build
-      #- run: yarn test
+      - run: yarn build
+      - run: yarn test
      
       - name: Build Angular App
         run: ORT-FI-8184-TALLER-GRUPO3/angular/.github/scripts/build.sh
