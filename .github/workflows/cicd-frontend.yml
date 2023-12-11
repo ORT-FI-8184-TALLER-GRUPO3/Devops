@@ -3,9 +3,9 @@ name: Github Action Frontend
 on:
   workflow_call:
     inputs:
-        branchname:
-        description: 'Branch name for CI_ENV'
+      branchname:
         required: true
+        type: string
 
 jobs:
   SonarTest:
@@ -20,7 +20,7 @@ jobs:
       - name: Run SonarQube Analysis
         uses: ./.github/workflows/sonarscan.yml
         secrets:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   build-dev:
     needs: SonarTest
