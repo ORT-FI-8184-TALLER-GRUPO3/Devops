@@ -14,12 +14,12 @@ concurrency:
 
 jobs:
   SonarTest:
-    uses: ./.github/workflows/sonarscan.yml
+    uses: ./.github/workflows/sonarscan_frontend.yml
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   build-dev:
     needs: SonarTest
-    uses: ./.github/workflows/deploy-to-s3.yml
+    uses: ./.github/workflows/deploy-to-s3_frontend.yml
     with:
       CI_ENV: Dev
       CONTENTFUL_ENVIRONMENT: 'Dev'
