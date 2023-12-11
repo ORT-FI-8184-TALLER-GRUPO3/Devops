@@ -1,9 +1,9 @@
-name: Github Action Workflow DEV
+name: Github Action Frontend
 
 on:
   workflow_call:
     inputs:
-      branchname:
+        branchname:
         description: 'Branch name for CI_ENV'
         required: true
 
