@@ -130,7 +130,7 @@ jobs:
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: servicio_pagos
+        service: ServicioPagos
         cluster: dev_ecs_cluster
         wait-for-service-stability: true
 
