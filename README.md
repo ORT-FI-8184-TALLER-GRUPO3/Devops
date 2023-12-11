@@ -1,5 +1,5 @@
 <p align = "center">
-<img src = "Extras/Imagenes/ortLogo.jpg" width=100%>
+<img src = "./Extras/Imagenes/ortLogo.jpg" width=100%>
 </p>
 
 ### Facultad de ingeniería 
