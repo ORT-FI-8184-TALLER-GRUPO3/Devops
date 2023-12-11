@@ -3,7 +3,7 @@ name: Github Action Frontend
 on:
   workflow_call:
     inputs:
-      branchname:
+      bucket:
         required: true
         type: string
 
@@ -27,4 +27,4 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
       AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN}}
       AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-      S3_ORIGIN_BUCKET: ${{ inputs.branchname }}
+      S3_ORIGIN_BUCKET: ${{ inputs.bucket }}
