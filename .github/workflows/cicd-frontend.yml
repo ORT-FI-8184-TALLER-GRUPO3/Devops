@@ -17,12 +17,17 @@ jobs:
   DeployToS3:
     name: DeployToS3
     needs: SonarQubeAnalisis
-    uses: ./.github/workflows/s3deploy-frontend.yml
-    with:
-      CI_ENV: ${{ inputs.branchname }}
-      CONTENTFUL_ENVIRONMENT: ${{ inputs.branchname }}
-      run: echo "CI_ENV=${{ inputs.branchname }}" 
-    secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Deploy to S3
+        run: |
+          echo "CI_ENV=${{ inputs.branchname }}"
+          # Add your deployment commands here
+
+    env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
       AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN}}
