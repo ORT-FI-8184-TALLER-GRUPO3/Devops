@@ -8,16 +8,20 @@ on:
         type: string
 
 jobs:
-  SonarTest:
+  SonarQubeAnalisis:
+    name: SonarQubeAnalisis
     uses: ./.github/workflows/sonarscan-frontend.yml
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   DeployToS3:
+    name: DeployToS3
+    needs: SonarQubeAnalisis
     uses: ./.github/workflows/deploy-to-s3.yml
     with:
       CI_ENV: ${{ inputs.branchname }}
       CONTENTFUL_ENVIRONMENT: ${{ inputs.branchname }}
+      run: echo "CI_ENV=${{ inputs.branchname }}" 
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
