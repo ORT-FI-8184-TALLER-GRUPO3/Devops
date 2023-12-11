@@ -123,7 +123,7 @@ jobs:
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
         task-definition: task-definitions/task-definition_pagos.json
-        container-name: github_container
+        container-name: imagen_pagos
         image: ${{ steps.build-image.outputs.image }}
       
 
