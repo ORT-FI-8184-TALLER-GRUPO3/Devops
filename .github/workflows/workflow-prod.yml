@@ -1,12 +1,7 @@
 name: Github Action Workflow PROD
 
 on:
-  push:
-    branches:
-      - Prod
-  pull_request:
-    types: [opened, synchronize, reopened]
-  workflow_dispatch:
+  workflow_call:
 
 concurrency:
   group: environment-${{ github.ref }}
