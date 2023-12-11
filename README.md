@@ -4,7 +4,7 @@
 
 ### Facultad de ingeniería | Escuela de tecnología - DevOps 
 
-#### Entregado como requisito para la obtención de la certificación en Devops.
+Entregado como requisito para la obtención de la certificación en Devops.
 
 
 
@@ -20,9 +20,9 @@
 
 
 
-Rafael
-Maximiliano
-Matias Techeira - 176519
+Rafael <br>
+Maximiliano<br>
+Matias Techeira - 176519<br>
 
 Tutor: Lic. Federico Barcelo
 
@@ -52,9 +52,9 @@ En el desarrollo de microservicios, utilizamos repositorios específicos que alb
 
 En nuestra estructura, definimos tres ramas estables: **Dev**, **Prod** y **Test**. Cada una de estas ramas cumple un papel específico y crítico en el ciclo de vida del software. A continuación, se presenta un diagrama detallado que ilustra el flujo de trabajo que seguimos, resaltando cómo GitFlow facilita una gestión más ordenada y controlada de los cambios en nuestros repositorios de microservicios.
 
-![Imagen que contiene reloj, medidor
-
-Descripción generada automáticamente](Aspose.Words.676081b8-0bf0-4006-b05d-e6bfc9621b99.001.png)
+<p align = "center">
+<img src = "./extras/gitflow.png" width=100%>
+</p>
 
 **Repositorio de DevOps y la Estrategia de Trunk Based** 
 
@@ -66,7 +66,7 @@ Esta forma de trabajar se alinea perfectamente con los principios de integració
 
 Esto nos ayuda a garantizar una entrega continua de software de alta calidad, manteniendo un enfoque colaborativo y dinámico en la gestión. A continuación, presentamos un diagrama que ilustra este proceso con una rama efímera feature.
 
-![Diagrama
-
-Descripción generada automáticamente](Aspose.Words.676081b8-0bf0-4006-b05d-e6bfc9621b99.002.png)
+<p align = "center">
+<img src = "./extras/trunkbased.png" width=100%>
+</p>
 
