@@ -1,12 +1,7 @@
 name: Github Action Workflow DEV
 
 on:
-  push:
-    branches:
-      - Dev
-  pull_request:
-    types: [opened, synchronize, reopened]
-  workflow_dispatch:
+  workflow_call:
 
 concurrency:
   group: environment-${{ github.ref }}
