@@ -42,14 +42,12 @@ jobs:
 
       - name: Build app
         run: npm run build
-     
-      - name: Build web app
-        run: ORT-FI-8184-TALLER-GRUPO3/Webapp/.github/scripts/build.sh
-        shell: bash
-        env:
-          CI_ENV: ${{ inputs.CI_ENV }}
-          CONTENTFUL_ENVIRONMENT: ${{ inputs.CONTENTFUL_ENVIRONMENT }}
-          S3_ORIGIN_BUCKET: ${{ secrets.S3_ORIGIN_BUCKET }}
+      
+      - name: Upload Artifact with JAR file
+        uses: actions/upload-artifact@v3
+        with:
+          name: "subida"
+          path: dist/
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
