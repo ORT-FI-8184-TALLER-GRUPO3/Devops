@@ -16,8 +16,8 @@ jobs:
     needs: SonarTest
     uses: ./.github/workflows/deploy-to-s3_frontend.yml
     with:
-      CI_ENV: Dev
-      CONTENTFUL_ENVIRONMENT: 'Dev'
+      CI_ENV: dev
+      CONTENTFUL_ENVIRONMENT: 'dev'
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
