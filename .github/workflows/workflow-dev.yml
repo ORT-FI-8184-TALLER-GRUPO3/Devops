@@ -8,12 +8,12 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-#  SonarTest:
-#    uses: ./.github/workflows/sonarscan_frontend.yml
-#    secrets:
-#      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  SonarTest:
+    uses: ./.github/workflows/sonarscan_frontend.yml
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   build-dev:
-#    needs: SonarTest
+    needs: SonarTest
     uses: ./.github/workflows/deploy-to-s3_frontend.yml
     with:
       CI_ENV: dev
