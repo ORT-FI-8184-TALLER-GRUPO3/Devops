@@ -94,7 +94,7 @@ jobs:
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
         service: ${{ inputs.service }}
-        cluster: BackendCluster
+        cluster: ${{ inputs.target }}_ecs_cluster
         wait-for-service-stability: true
 
     
