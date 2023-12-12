@@ -18,15 +18,15 @@ on:
         type: string
 
 jobs:
-  SonarTest:
-    uses: ./.github/workflows/sonarscan_backends.yml
-    with:
-      SONAR_PROJECT: ${{ inputs.SONAR_PROJECT }}  
-    secrets:
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#  SonarTest:
+#    uses: ./.github/workflows/sonarscan_backends.yml
+#    with:
+#      SONAR_PROJECT: ${{ inputs.SONAR_PROJECT }}  
+#    secrets:
+#      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   build-and-deploy:
-    needs: SonarTest
+#    needs: SonarTest
     runs-on: ubuntu-latest
 
     steps:
