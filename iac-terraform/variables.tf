@@ -5,6 +5,11 @@ variable "app_name" {
   default     = "applicacion_por_defecto"
 }
 
+variable "region" {
+  default = "us-east-1"
+}
+
+
 variable "environment_name" {
   description = "Nombre del ambiente para la aplicacion"
   type	      = string
