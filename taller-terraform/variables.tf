@@ -35,3 +35,11 @@ variable "s3_bucket_postfix" {
   type        = string
   default     = "-devops-g3-frontend"
 }
+
+
+variable "aws_account_id" {
+  description = "AWSAccountId"
+  type        = string
+  default     = "556390483751"
+}
+

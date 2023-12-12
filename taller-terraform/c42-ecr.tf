@@ -2,7 +2,7 @@
 
 resource "aws_ecr_repository" "products" {
   count = var.creoECRs ? 1 : 0
-  name                 = "products"
+  name                 = "ecr-products-service"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
@@ -12,7 +12,7 @@ resource "aws_ecr_repository" "products" {
 
 resource "aws_ecr_repository" "orders-service-example" {
   count = var.creoECRs ? 1 : 0
-  name                 = "orders-service-example"
+  name                 = "ecr-orders-service"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
@@ -22,7 +22,7 @@ resource "aws_ecr_repository" "orders-service-example" {
 
 resource "aws_ecr_repository" "shipping" {
   count = var.creoECRs ? 1 : 0
-  name                 = "shipping"
+  name                 = "ecr-shipping-service"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
@@ -32,7 +32,7 @@ resource "aws_ecr_repository" "shipping" {
 
 resource "aws_ecr_repository" "pagos" {
   count = var.creoECRs ? 1 : 0
-  name                 = "pagos"
+  name                 = "ecr-payments-service"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
