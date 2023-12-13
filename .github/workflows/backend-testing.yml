@@ -30,53 +30,27 @@ jobs:
           mvn package
 
       - name: Build Environment
-        run: |
-          pwd
+        run: | 
+          git clone https://github.com/ORT-FI-8184-TALLER-GRUPO3/orders-service
+          cd devops_products-service 
+          mvn package 
+          java -Dserver.port=8888 -jar target/products-service-0.0.1-SNAPSHOT-spring-boot.jar -DskipTest &
+          sleep 5
+          cd .. 
+          git clone https://github.com/ORT-FI-8184-TALLER-GRUPO3/shipping-service
+          cd devops_shipping-service 
+          mvn package 
+          java -Dserver.port=8887 -jar target/shipping-service-0.0.1-SNAPSHOT-spring-boot.jar -DskipTest &
+          sleep 5
           cd ..
-          if [ "${{env.REPO_NAME}}" != "orders-service" ]; then
-              gh repo clone ORT-FI-8184-TALLER-GRUPO3/${{env.REPO_NAME}}          
-              mvn -f ${{env.REPO_NAME}}/ -B package
-              java -jar ${{env.REPO_NAME}}/target/${{env.REPO_NAME}}.jar --server.port=8081&
-              sleep 5
-              cd ..
-              pwd
-          else
-              pwd
-              cd ..
-              for service in payments shipping products; do
-                gh repo clone ORT-FI-8184-TALLER-GRUPO3/${service}-service           
-                mvn -f ${service}-service/ -B package
-                java -jar ${service}-service/target/${service}-service.jar --server.port=808$((4 - ${service: -1}))&
-                sleep 5
-                pw
-                cd .. 
-              done
+          git clone https://github.com/ORT-FI-8184-TALLER-GRUPO3/payments-service 
+          cd devops_payments-service 
+          mvn package 
+          java -Dserver.port=8886 -jar target/payments-service-0.0.1-SNAPSHOT-spring-boot.jar -DskipTest &
+          sleep 5
+          cd .. 
+          java -jar target/${{ env.SERVICE_NAME }}-service-0.0.1-SNAPSHOT-spring-boot.jar http://localhost:8886 http://localhost:8887 http://localhost:8888 &
+          sleep 5
+          newman run TestingBackend/testing-backend-service.json
           
-              gh repo clone ORT-FI-8184-TALLER-GRUPO3/${{env.REPO_NAME}}
-              mvn -f ${{env.REPO_NAME}}/ -B package
-              java -jar ${{env.REPO_NAME}}-service/target/${{env.REPO_NAME}}-service.jar ${{ env.APP_ARGS }} --server.port=8080&
-              sleep 5
-              cd .. 
-          fi    
-
-      - name: Install Postman CLI
-        run: curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
-
-      - name: Login to Postman CLI
-        run: postman login --with-api-key ${{ env.POSTMAN_API_KEY }}
-
-      - name: Get JSON file with Postman Collection
-        run: |
-          curl -H 'Authorization: token ${{ env.GH_TOKEN }}' \
-          -H 'Accept: application/vnd.github.v3.raw' \
-          -O -L 'https://raw.githubusercontent.com/ORT-FI-8184-TALLER-GRUPO3/Devops/main/TestingBackend/testing-backend-service.json'
-     
-      - name: Obtener IP del Host
-        run: |
-          HOST_IP=$(ip route show default | awk '/default/ {print $3}')
-          echo "La IP del host es: $HOST_IP"
-          
-      - name: Run Postman CLI backend testing
-        run: 
-          postman collection run testing-backend-service.json&
           
