@@ -58,7 +58,12 @@ jobs:
           curl -H 'Authorization: token ${{ env.GH_TOKEN }}' \
           -H 'Accept: application/vnd.github.v3.raw' \
           -O -L 'https://raw.githubusercontent.com/ORT-FI-8184-TALLER-GRUPO3/Devops/main/TestingBackend/testing-backend-service.json'
-
+     
+      - name: Obtener IP del Host
+        run: |
+          HOST_IP=$(ip route show default | awk '/default/ {print $3}')
+          echo "La IP del host es: $HOST_IP"
+          
       - name: Run Postman CLI backend testing
         run: 
           pwd &
