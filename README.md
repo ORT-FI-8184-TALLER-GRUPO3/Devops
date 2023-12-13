@@ -48,11 +48,13 @@ Por parte de la directiva se propuso la implementación de un modelo DevOps como
 
 Desmenuzando el objetivo central planteado en el Abstract, el equipo se plantea las siguientes metas específicas:
 
-1. Implementar la infraestructura en la plataforma de nube de AWS, utilizando para ello la herramienta Terraform.
+1. Implementar la infraestructura en la plataforma de nube de AWS, utilizando para ello la herramienta Terraform (IaC).
 2. Incorporar pruebas automáticas y análisis de código estático (SonarCloud).
 3. Desarrollar un proceso integral de integración continua y entrega continua (CI/CD).
 4. Gestionar microservicios empaquetados en contenedores, para su despliegue en un sistema de orquestación en la nube de AWS, específicamente utilizando imágenes Docker en ECS Fargate.
 5. Mantener una eficiencia óptima en las prácticas de las metodologías ágiles, con el fin de ofrecer una solución que potencie tanto la calidad como la velocidad de los procesos.
+
+##Estrategia de ramas
 
 **Repositorios de Microservicios y la Implementación de GitFlow**
 
@@ -78,3 +80,14 @@ Esto nos ayuda a garantizar una entrega continua de software de alta calidad, ma
 <img src = "./extras/trunkbased.png" width=100%>
 </p>
 
+##Estrategia para CI/CD 
+
+**Backend**
+
+El proceso de integración y despliegue continuo implementado en el repositorio de DevOps centraliza y estandariza el ciclo de vida del software de los microservicios del backend. Esta arquitectura de CI/CD permite a cada microservicio del backend invocar un workflow genérico, ya que su lógica es similar pero a su vez proporcionando parámetros específicos que adaptan la ejecución a sus necesidades individuales.
+
+La utilización de un workflow genérico para el backend facilita la gestión del código y la infraestructura, permitiendo actualizaciones y mejoras centralizadas que se propagan automáticamente a todos los microservicios del backend. Los microservicios, a través de sus respectivos repositorios, hacen uso de un archivo 'caller.yml', que activa el workflow genérico. Este 'caller' es un manifiesto que, al detectar cambios en el código como nuevos 'push' o 'pull requests', envía la información relevante al workflow centralizado en DevOps.
+
+Esta estrategia desacopla el proceso de CI/CD de los repositorios individuales de los microservicios y centraliza la lógica de integración y despliegue en un único lugar. Al proteger la lógica dentro del repositorio de DevOps, se asegura la integridad del flujo de trabajo e idealmente simplifica la gestión de los secretos y configuraciones (vale aclarar, que inicialmente no se tenía ésta estructura y se utilizaba los secretos en cada repositorio individual, al transformar y mudar el flujo de trabajo, se decidio utilizar secrets: inherit en los llamadores para pasarle dicha información al workflow reutilizable ya que no se disponía de mucho tiempo extra para ajustar, pero entendemos que para que la coherencia exista en este tipo de solución, dichos secretos se tendrían que haber mudado al repositorio de Devops por cuestiones de escalabilidad y seguridad). Además, esta abstracción permite que los equipos de desarrollo se enfoquen en el desarrollo de características y correcciones, confiando en que el proceso de CI/CD se maneja de manera consistente y segura desde un solo punto de control.
+
+La automatización del pipeline fomenta la eficiencia y la cohesión entre los equipos, reduciendo la redundancia y los errores manuales, y promoviendo un ambiente de trabajo más ágil y enfocado en la entrega de valor continuo. Con esta implementación, se abraza el espíritu de DevOps de colaboración y mejora continua, mientras se mantiene una infraestructura robusta y adaptable a los cambios rápidos y constantes del desarrollo de software moderno.
