@@ -5,7 +5,7 @@ on:
 
 env:
   GH_TOKEN: ${{ github.token }}
-  POSTMAN_API_KEY: PMAK-6579143cf938a673eb62ed4e-e019040d8cab3615510f1cefc4befefabe
+  POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
   REPO_NAME: ${{ github.event.repository.name }}
   APP_ARGS: 'http://localhost:8081 http://localhost:8082 http://localhost:8083'
 
