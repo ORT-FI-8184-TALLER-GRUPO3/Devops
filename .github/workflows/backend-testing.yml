@@ -63,5 +63,6 @@ jobs:
         run: 
           pwd &
           ls &
-          cat testing-backend-service.json &
           postman collection run testing-backend-service.json
+#          cat testing-backend-service.json &
+          
