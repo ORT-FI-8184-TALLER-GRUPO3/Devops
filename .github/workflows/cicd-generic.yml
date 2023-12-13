@@ -31,7 +31,7 @@ jobs:
     uses: ./.github/workflows/backend-testing.yml
     
   Build-Deploy:
-    needs: SonarAnalysis
+    needs: RunsBackendTest
     runs-on: ubuntu-latest
 
     steps:
