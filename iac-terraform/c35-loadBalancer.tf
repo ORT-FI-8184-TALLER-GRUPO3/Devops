@@ -5,7 +5,7 @@ resource "aws_lb" "payments" {
   load_balancer_type = "application"
   subnets            = [aws_subnet.vpc-ecs-public-subnet-1.id,aws_subnet.vpc-ecs-public-subnet-2.id]
   security_groups    = [aws_security_group.ecs-vpc-sg.id]
-  depends_on = [aws_security_group.ecs-vpc-sg]
+  #depends_on = [aws_security_group.ecs-vpc-sg]
   tags = {
     Name = "${var.environment_prefix}-alb-payments"
   }
@@ -55,7 +55,7 @@ resource "aws_lb" "shipping" {
   load_balancer_type = "application"
   subnets            = [aws_subnet.vpc-ecs-public-subnet-1.id,aws_subnet.vpc-ecs-public-subnet-2.id]
   security_groups    = [aws_security_group.ecs-vpc-sg.id]
-  depends_on = [aws_security_group.ecs-vpc-sg]
+  #depends_on = [aws_security_group.ecs-vpc-sg]
   tags = {
     Name = "${var.environment_prefix}-alb-shipping"
   }
@@ -103,7 +103,7 @@ resource "aws_lb" "products" {
   load_balancer_type = "application"
   subnets            = [aws_subnet.vpc-ecs-public-subnet-1.id,aws_subnet.vpc-ecs-public-subnet-2.id]
   security_groups    = [aws_security_group.ecs-vpc-sg.id]
-  depends_on = [aws_security_group.ecs-vpc-sg]
+  #depends_on = [aws_security_group.ecs-vpc-sg]
   tags = {
     Name = "${var.environment_prefix}-alb-products"
   }
@@ -152,7 +152,7 @@ resource "aws_lb" "orders" {
   load_balancer_type = "application"
   subnets            = [aws_subnet.vpc-ecs-public-subnet-1.id,aws_subnet.vpc-ecs-public-subnet-2.id]
   security_groups    = [aws_security_group.ecs-vpc-sg.id]
-  depends_on = [aws_security_group.ecs-vpc-sg]
+  #depends_on = [aws_security_group.ecs-vpc-sg]
   tags = {
     Name = "${var.environment_prefix}-alb-orders"
   }
