@@ -35,16 +35,22 @@ jobs:
               gh repo clone ORT-FI-8184-TALLER-GRUPO3/${{env.REPO_NAME}}          
               mvn -f ${{env.REPO_NAME}}/ -B package
               java -jar ${{env.REPO_NAME}}/target/${{env.REPO_NAME}}.jar --server.port=8081&
+              sleep 5
+              cd ..
           else
               for service in payments shipping products; do
                 gh repo clone ORT-FI-8184-TALLER-GRUPO3/${service}-service           
                 mvn -f ${service}-service/ -B package
                 java -jar ${service}-service/target/${service}-service.jar --server.port=808$((4 - ${service: -1}))&
+                sleep 5
+                cd .. 
               done
 
               gh repo clone ORT-FI-8184-TALLER-GRUPO3/${{env.REPO_NAME}}
               mvn -f ${{env.REPO_NAME}}/ -B package
               java -jar ${{env.REPO_NAME}}-service/target/${{env.REPO_NAME}}-service.jar ${{ env.APP_ARGS }} --server.port=8080&
+              sleep 5
+              cd .. 
           fi    
 
       - name: Install Postman CLI
