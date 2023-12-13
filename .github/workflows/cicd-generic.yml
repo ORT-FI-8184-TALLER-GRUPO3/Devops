@@ -19,7 +19,7 @@ on:
 
 
 jobs:
-  SonarTest:
+  SonarAnalysis:
     uses: ./.github/workflows/sonarscan_backends.yml
     with:
       SONAR_PROJECT: ${{ inputs.SONAR_PROJECT }}  
@@ -27,11 +27,11 @@ jobs:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       
   RunsBackendTest:
-    needs: SonarTest
+    needs: SonarAnalysis
     uses: ./.github/workflows/backend-testing.yml
     
-  build-and-deploy:
-    needs: SonarTest
+  Build-Deploy:
+    needs: SonarAnalysis
     runs-on: ubuntu-latest
 
     steps:
