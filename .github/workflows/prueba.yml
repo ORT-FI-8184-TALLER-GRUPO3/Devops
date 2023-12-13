@@ -51,8 +51,6 @@ jobs:
 
       - name: Login to Postman CLI
         run: postman login --with-api-key ${{ env.POSTMAN_API_KEY }}
-        env:
-          GH_TOKEN: ${{ env.GH_TOKEN }}
 
       - name: Get JSON file with Postman Collection
         run: |
