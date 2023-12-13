@@ -31,6 +31,7 @@ jobs:
 
       - name: Build Environment
         run: |
+          cd ..
           if [ "${{env.REPO_NAME}}" != "orders-service" ]; then
               gh repo clone ORT-FI-8184-TALLER-GRUPO3/${{env.REPO_NAME}}          
               mvn -f ${{env.REPO_NAME}}/ -B package
@@ -38,6 +39,7 @@ jobs:
               sleep 5
               cd ..
           else
+              cd ..
               for service in payments shipping products; do
                 gh repo clone ORT-FI-8184-TALLER-GRUPO3/${service}-service           
                 mvn -f ${service}-service/ -B package
