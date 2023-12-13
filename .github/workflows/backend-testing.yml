@@ -57,7 +57,7 @@ jobs:
         run: |
           curl -H 'Authorization: token ${{ env.GH_TOKEN }}' \
           -H 'Accept: application/vnd.github.v3.raw' \
-          -O -L 'https://github.com/ORT-FI-8184-TALLER-GRUPO3/Devops/blob/main/TestingBackend/testing-backend-service.json'
+          -O -L 'https://raw.githubusercontent.com/ORT-FI-8184-TALLER-GRUPO3/Devops/main/TestingBackend/testing-backend-service.json'
 
       - name: Run Postman CLI backend testing
         run: 
