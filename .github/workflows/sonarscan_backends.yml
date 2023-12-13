@@ -16,7 +16,7 @@ on:
         required: true
 jobs:
   build:
-    name: Build and analyze
+    name: SonarAnalysis
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
