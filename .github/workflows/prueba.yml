@@ -4,7 +4,7 @@ on:
   workflow_call:
 
 env:
-  OAUTH_TOKEN: ${{ secrets.Devops2023 }}
+  GH_TOKEN: ${{ secrets.Devops2023 }}
   POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
   REPO_NAME: ${{ github.event.repository.name }}
   APP_ARGS: 'http://localhost:8081 http://localhost:8082 http://localhost:8083'
@@ -54,7 +54,7 @@ jobs:
 
       - name: Get JSON file with Postman Collection
         run: |
-          curl -H 'Authorization: token ${{ env.OAUTH_TOKEN }}' \
+          curl -H 'Authorization: token ${{ env.GH_TOKEN }}' \
           -H 'Accept: application/vnd.github.v3.raw' \
           -O -L 'https://github.com/ORT-FI-8184-TALLER-GRUPO3/Devops/blob/main/TestingBackend/testing-backend-service.json'
 
