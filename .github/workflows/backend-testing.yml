@@ -31,7 +31,7 @@ jobs:
 
       - name: Build Environment
         run: | 
-          git clone https://github.com/ORT-FI-8184-TALLER-GRUPO3/orders-service
+          git clone https://github.com/ORT-FI-8184-TALLER-GRUPO3/products-service
           pwd
           cd products-service 
           mvn package 
