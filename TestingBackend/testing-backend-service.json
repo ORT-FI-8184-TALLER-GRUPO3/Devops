@@ -74,7 +74,7 @@
 				"url": {
 					"raw": "http://localhost:8082/shipping/c",
 					"host": [
-						"{{API_GATEWAY_IP}}"
+						"http://localhost:8082"
 					],
 					"path": [
 						"shipping",
@@ -103,6 +103,12 @@
 					""
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"key": "API_GATEWAY_IP",
+			"value": "http://localhost:8080"
 		}
 	]
 }
