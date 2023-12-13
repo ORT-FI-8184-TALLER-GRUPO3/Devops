@@ -52,6 +52,6 @@ jobs:
           cd .. 
           java -jar target/${{ env.SERVICE_NAME }}-service-0.0.1-SNAPSHOT-spring-boot.jar http://localhost:8886 http://localhost:8887 http://localhost:8888 &
           sleep 5
-          newman run TestingBackend/testing-backend-service.json
+          newman run testing-backend-service.json
           
           
