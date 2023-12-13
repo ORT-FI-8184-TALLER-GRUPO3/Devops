@@ -31,6 +31,7 @@ jobs:
 
       - name: Build Environment
         run: |
+          pwd
           cd ..
           if [ "${{env.REPO_NAME}}" != "orders-service" ]; then
               gh repo clone ORT-FI-8184-TALLER-GRUPO3/${{env.REPO_NAME}}          
@@ -38,16 +39,19 @@ jobs:
               java -jar ${{env.REPO_NAME}}/target/${{env.REPO_NAME}}.jar --server.port=8081&
               sleep 5
               cd ..
+              pwd
           else
+              pwd
               cd ..
               for service in payments shipping products; do
                 gh repo clone ORT-FI-8184-TALLER-GRUPO3/${service}-service           
                 mvn -f ${service}-service/ -B package
                 java -jar ${service}-service/target/${service}-service.jar --server.port=808$((4 - ${service: -1}))&
                 sleep 5
+                pw
                 cd .. 
               done
-
+          
               gh repo clone ORT-FI-8184-TALLER-GRUPO3/${{env.REPO_NAME}}
               mvn -f ${{env.REPO_NAME}}/ -B package
               java -jar ${{env.REPO_NAME}}-service/target/${{env.REPO_NAME}}-service.jar ${{ env.APP_ARGS }} --server.port=8080&
@@ -74,11 +78,5 @@ jobs:
           
       - name: Run Postman CLI backend testing
         run: 
-          cd .. &
-          pwd &
-          ls &
-          pwd &
-          ls &
-          postman collection run testing-backend-service.json
-#          cat testing-backend-service.json &
+          postman collection run testing-backend-service.json&
           
