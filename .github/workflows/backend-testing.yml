@@ -32,19 +32,19 @@ jobs:
       - name: Build Environment
         run: | 
           git clone https://github.com/ORT-FI-8184-TALLER-GRUPO3/orders-service
-          cd devops_products-service 
+          cd products-service 
           mvn package 
           java -Dserver.port=8888 -jar target/products-service-0.0.1-SNAPSHOT-spring-boot.jar -DskipTest &
           sleep 5
           cd .. 
           git clone https://github.com/ORT-FI-8184-TALLER-GRUPO3/shipping-service
-          cd devops_shipping-service 
+          cd shipping-service 
           mvn package 
           java -Dserver.port=8887 -jar target/shipping-service-0.0.1-SNAPSHOT-spring-boot.jar -DskipTest &
           sleep 5
           cd ..
           git clone https://github.com/ORT-FI-8184-TALLER-GRUPO3/payments-service 
-          cd devops_payments-service 
+          cd payments-service 
           mvn package 
           java -Dserver.port=8886 -jar target/payments-service-0.0.1-SNAPSHOT-spring-boot.jar -DskipTest &
           sleep 5
