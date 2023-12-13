@@ -11,9 +11,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://products-service:8081/products",
+					"raw": "http://10.1.0.1:8081/products",
 					"host": [
-						"http://products-service:8081"
+						"http://10.1.0.1:8081"
 					],
 					"path": [
 						"products"
@@ -28,9 +28,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://products-service:8081/products/123",
+					"raw": "http://10.1.0.1:8081/products/123",
 					"host": [
-						"http://products-service:8081"
+						"http://10.1.0.1:8081"
 					],
 					"path": [
 						"products",
@@ -55,9 +55,9 @@
 					}
 				},
 				"url": {
-					"raw": "http://orders-service:8080/orders",
+					"raw": "http://10.1.0.1:8080/orders",
 					"host": [
-						"http://orders-service:8080"
+						"http://10.1.0.1:8080"
 					],
 					"path": [
 						"orders"
@@ -72,9 +72,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://shipping-service:8082/shipping/c",
+					"raw": "http://10.1.0.1:8082/shipping/c",
 					"host": [
-						"http://shipping-service:8082"
+						"http://10.1.0.1:8082"
 					],
 					"path": [
 						"shipping",
@@ -108,7 +108,7 @@
 	"variable": [
 		{
 			"key": "API_GATEWAY_IP",
-			"value": "http://localhost:8080"
+			"value": "10.1.0.1"
 		}
 	]
 }
