@@ -60,5 +60,6 @@ jobs:
           -O -L 'https://github.com/ORT-FI-8184-TALLER-GRUPO3/Devops/TestingBackend/testing-backend-service.json'
 
       - name: Run Postman CLI backend testing
-        run: postman collection run testing-backend-service.json
-
+#        run: postman collection run testing-backend-service.json
+        run: |
+          newman run ./TestingBackend/testing-backend-service.json -r cli
