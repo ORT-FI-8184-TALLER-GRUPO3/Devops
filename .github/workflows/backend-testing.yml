@@ -47,11 +47,15 @@ jobs:
           git clone https://github.com/ORT-FI-8184-TALLER-GRUPO3/payments-service 
           cd payments-service 
           mvn package 
-          java -Dserver.port=8886 -jar target/payments-service-0.0.1-SNAPSHOT-spring-boot.jar -DskipTest &
+          java -Dserver.port=8886 -jar target/payments-service0.0.1-SNAPSHOT-spring-boot.jar -DskipTest &
           sleep 5
           cd .. 
-          java -jar target/${{ env.SERVICE_NAME }}-service-0.0.1-SNAPSHOT-spring-boot.jar http://localhost:8886 http://localhost:8887 http://localhost:8888 &
+          java -jar target/${{ env.SERVICE_NAME }}-0.0.1-SNAPSHOT-spring-boot.jar http://localhost:8886 http://localhost:8887 http://localhost:8888 &
           sleep 5
+          run: |
+          curl -H 'Authorization: token ${{ env.GH_TOKEN }}' \
+          -H 'Accept: application/vnd.github.v3.raw' \
+          -O -L 'https://raw.githubusercontent.com/ORT-FI-8184-TALLER-GRUPO3/Devops/main/TestingBackend/testing-backend-service.json'
           newman run testing-backend-service.json
           
           
