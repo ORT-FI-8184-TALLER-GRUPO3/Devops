@@ -25,7 +25,11 @@ jobs:
       SONAR_PROJECT: ${{ inputs.SONAR_PROJECT }}  
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
+      
+  RunsBackendTest:
+    needs: SonarTest
+    uses: ./.github/workflows/backend-testing.yml
+    
   build-and-deploy:
     needs: SonarTest
     runs-on: ubuntu-latest
