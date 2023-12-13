@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "f4ff521d-b437-4ad8-9b4b-bfc47e0d0056",
-		"name": "MonolithToMicroservicesExample",
+		"name": "BackendServicesTesting",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -11,9 +11,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{API_GATEWAY_IP}}/products",
+					"raw": "http://localhost:8081/products",
 					"host": [
-						"{{API_GATEWAY_IP}}"
+						"http://localhost:8081"
 					],
 					"path": [
 						"products"
@@ -28,9 +28,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{API_GATEWAY_IP}}/products/123",
+					"raw": "http://localhost:8081/products/123",
 					"host": [
-						"{{API_GATEWAY_IP}}"
+						"http://localhost:8081"
 					],
 					"path": [
 						"products",
@@ -55,9 +55,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{API_GATEWAY_IP}}/orders",
+					"raw": "http://localhost:8080/orders",
 					"host": [
-						"{{API_GATEWAY_IP}}"
+						"http://localhost:8080"
 					],
 					"path": [
 						"orders"
@@ -72,7 +72,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{API_GATEWAY_IP}}/shipping/c",
+					"raw": "http://localhost:8082/shipping/c",
 					"host": [
 						"{{API_GATEWAY_IP}}"
 					],
@@ -103,12 +103,6 @@
 					""
 				]
 			}
-		}
-	],
-	"variable": [
-		{
-			"key": "API_GATEWAY_IP",
-			"value": "172.17.0.4"
 		}
 	]
 }
