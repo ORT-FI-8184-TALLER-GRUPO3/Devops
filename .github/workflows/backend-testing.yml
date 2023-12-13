@@ -72,6 +72,9 @@ jobs:
           
       - name: Run Postman CLI backend testing
         run: 
+          cd .. &
+          pwd &
+          ls &
           pwd &
           ls &
           postman collection run testing-backend-service.json
