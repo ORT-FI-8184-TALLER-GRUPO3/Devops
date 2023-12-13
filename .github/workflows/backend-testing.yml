@@ -15,6 +15,10 @@ jobs:
     runs-on: ubuntu-22.04
     name: Testing Backend
     steps:
+      - name: Obtener IP del Host
+        run: |
+          HOST_IP=$(ip route show default | awk '/default/ {print $3}')
+          echo "La IP del host es: $HOST_IP"
       - name: Checkout Code
         uses: actions/checkout@v4
 
