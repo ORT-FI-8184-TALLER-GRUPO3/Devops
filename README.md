@@ -44,7 +44,15 @@ Por parte de la directiva se propuso la implementación de un modelo DevOps como
 ## Análisis de requerimientos
 
 ## Solución planteada ante la problemática
+**Puntos clave**
 
+Desmenuzando el objetivo central planteado en el Abstract, el equipo se plantea las siguientes metas específicas:
+
+1. Implementar la infraestructura en la plataforma de nube de AWS, utilizando para ello la herramienta Terraform.
+2. Incorporar pruebas automáticas y análisis de código estático (SonarCloud).
+3. Desarrollar un proceso integral de integración continua y entrega continua (CI/CD).
+4. Gestionar microservicios empaquetados en contenedores, para su despliegue en un sistema de orquestación en la nube de AWS, específicamente utilizando imágenes Docker en ECS Fargate.
+5. Mantener una eficiencia óptima en las prácticas de las metodologías ágiles, con el fin de ofrecer una solución que potencie tanto la calidad como la velocidad de los procesos.
 
 **Repositorios de Microservicios y la Implementación de GitFlow**
 
