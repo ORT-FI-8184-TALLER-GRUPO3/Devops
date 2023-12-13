@@ -3,7 +3,7 @@ resource "aws_ecs_service" "payments-service" {
   cluster         = aws_ecs_cluster.ecs_cluster.id
   task_definition = aws_ecs_task_definition.payments-task-def.arn
   launch_type     = "FARGATE"
-  desired_count   = 1
+  desired_count   = var.be_desired_count
   network_configuration {
     subnets          = [aws_subnet.vpc-ecs-public-subnet-1.id , aws_subnet.vpc-ecs-public-subnet-2.id]
     security_groups  = [aws_security_group.ecs-vpc-sg.id]
@@ -21,7 +21,7 @@ resource "aws_ecs_service" "shipping-service" {
   cluster         = aws_ecs_cluster.ecs_cluster.id
   task_definition = aws_ecs_task_definition.shipping-task-def.arn
   launch_type     = "FARGATE"
-  desired_count   = 1
+  desired_count   = var.be_desired_count
   network_configuration {
     subnets          = [aws_subnet.vpc-ecs-public-subnet-1.id , aws_subnet.vpc-ecs-public-subnet-2.id]
     security_groups  = [aws_security_group.ecs-vpc-sg.id]
@@ -38,7 +38,7 @@ resource "aws_ecs_service" "orders-service" {
   cluster         = aws_ecs_cluster.ecs_cluster.id
   task_definition = aws_ecs_task_definition.orders-task-def.arn
   launch_type     = "FARGATE"
-  desired_count   = 1
+  desired_count   = var.be_desired_count
   network_configuration {
     subnets          = [aws_subnet.vpc-ecs-public-subnet-1.id , aws_subnet.vpc-ecs-public-subnet-2.id]
     security_groups  = [aws_security_group.ecs-vpc-sg.id]
@@ -55,7 +55,7 @@ resource "aws_ecs_service" "products-service" {
   cluster         = aws_ecs_cluster.ecs_cluster.id
   task_definition = aws_ecs_task_definition.products-task-def.arn
   launch_type     = "FARGATE"
-  desired_count   = 1
+  desired_count   = var.be_desired_count
   network_configuration {
     subnets          = [aws_subnet.vpc-ecs-public-subnet-1.id , aws_subnet.vpc-ecs-public-subnet-2.id]
     security_groups  = [aws_security_group.ecs-vpc-sg.id]

@@ -54,4 +54,20 @@ variable "aws_account_id" {
   default     = "556390483751"
 }
 
+variable "be_desired_count" {
+  description = "Desired count de servicio de Back-End"
+  type        = number
+  default     = 1
+}
 
+variable "be_cpu" {
+  description = "CPU asignado al servicio de Back-End"
+  type        = string
+  default     = "256"
+}
+
+variable "be_memory" {
+  description = "CPU asignado al servicio de Back-End"
+  type        = string
+  default     = "512"
+}

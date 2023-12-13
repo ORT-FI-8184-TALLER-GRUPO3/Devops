@@ -1,29 +1,11 @@
-resource "aws_security_group" "be_sg" {
-  name        = "be_sg"
-  description = "Security group for backend service"
-  vpc_id      = aws_vpc.vpc-ecs.id
-  ingress {
-    from_port   = 8080
-    to_port     = 8080
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port       = 0
-    to_port         = 0
-    protocol        = "-1"
-    cidr_blocks     = ["0.0.0.0/0"]
-  }
-}
-
 #Payments
 resource "aws_lb" "payments" {
   name               = "${var.environment_prefix}-alb-payments"
   internal           = false
   load_balancer_type = "application"
   subnets            = [aws_subnet.vpc-ecs-public-subnet-1.id,aws_subnet.vpc-ecs-public-subnet-2.id]
-  security_groups    = [aws_security_group.be_sg.id,aws_security_group.ecs-vpc-sg.id]
+  security_groups    = [aws_security_group.ecs-vpc-sg.id]
+  depends_on = [aws_security_group.ecs-vpc-sg]
   tags = {
     Name = "${var.environment_prefix}-alb-payments"
   }
@@ -72,7 +54,8 @@ resource "aws_lb" "shipping" {
   internal           = false
   load_balancer_type = "application"
   subnets            = [aws_subnet.vpc-ecs-public-subnet-1.id,aws_subnet.vpc-ecs-public-subnet-2.id]
-  security_groups    = [aws_security_group.be_sg.id,aws_security_group.ecs-vpc-sg.id]
+  security_groups    = [aws_security_group.ecs-vpc-sg.id]
+  depends_on = [aws_security_group.ecs-vpc-sg]
   tags = {
     Name = "${var.environment_prefix}-alb-shipping"
   }
@@ -119,7 +102,8 @@ resource "aws_lb" "products" {
   internal           = false
   load_balancer_type = "application"
   subnets            = [aws_subnet.vpc-ecs-public-subnet-1.id,aws_subnet.vpc-ecs-public-subnet-2.id]
-  security_groups    = [aws_security_group.be_sg.id,aws_security_group.ecs-vpc-sg.id]
+  security_groups    = [aws_security_group.ecs-vpc-sg.id]
+  depends_on = [aws_security_group.ecs-vpc-sg]
   tags = {
     Name = "${var.environment_prefix}-alb-products"
   }
@@ -167,7 +151,8 @@ resource "aws_lb" "orders" {
   internal           = false
   load_balancer_type = "application"
   subnets            = [aws_subnet.vpc-ecs-public-subnet-1.id,aws_subnet.vpc-ecs-public-subnet-2.id]
-  security_groups    = [aws_security_group.be_sg.id,aws_security_group.ecs-vpc-sg.id]
+  security_groups    = [aws_security_group.ecs-vpc-sg.id]
+  depends_on = [aws_security_group.ecs-vpc-sg]
   tags = {
     Name = "${var.environment_prefix}-alb-orders"
   }

@@ -5,3 +5,5 @@ availability_zone_1 = "us-east-1a"
 creoECRs = "true"
 s3_bucket_postfix = "-s3grp3-webapp"
 
+be_desired_count = 1
+

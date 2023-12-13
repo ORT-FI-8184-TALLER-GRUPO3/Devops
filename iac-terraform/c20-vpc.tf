@@ -14,6 +14,9 @@ resource "aws_subnet" "vpc-ecs-public-subnet-1" {
   cidr_block = "10.0.1.0/24"
   availability_zone = var.availability_zone_1
   map_public_ip_on_launch = true
+  tags = {
+    "Name" = "${var.environment_prefix}-vpc-ecs-public-subnet-1"
+  }
 }
 
 resource "aws_subnet" "vpc-ecs-public-subnet-2" {
@@ -21,6 +24,10 @@ resource "aws_subnet" "vpc-ecs-public-subnet-2" {
   cidr_block = "10.0.2.0/24"
   availability_zone = var.availability_zone_2
   map_public_ip_on_launch = true
+  tags = {
+    "Name" = "${var.environment_prefix}-vpc-ecs-public-subnet-2"
+  }
+
 }
 
 
@@ -62,22 +69,6 @@ resource "aws_security_group" "ecs-vpc-sg" {
   description = "${var.environment_name} - VPC Default Security Group"
 
   ingress {
-    description = "Allow Port 22"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    description = "Allow Port 80"
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  
-  ingress {
     description = "Allow Port 8080"
     from_port   = 8080
     to_port     = 8080
@@ -94,3 +85,5 @@ resource "aws_security_group" "ecs-vpc-sg" {
   }
 
 }
+
+

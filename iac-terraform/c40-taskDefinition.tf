@@ -4,8 +4,8 @@ resource "aws_ecs_task_definition" "payments-task-def" {
   #task_role_arn            = data.lab_user.arn
   execution_role_arn       = "arn:aws:iam::${var.aws_account_id}:role/LabRole"
   network_mode             = "awsvpc"
-  cpu                      = "256"
-  memory                   = "512"
+  cpu                      = var.be_cpu
+  memory                   = var.be_memory
   requires_compatibilities = ["FARGATE"]
   container_definitions    = <<TASK_DEFINITION
 [
@@ -37,8 +37,8 @@ resource "aws_ecs_task_definition" "shipping-task-def" {
   #task_role_arn            = data.lab_user.arn
   execution_role_arn       = "arn:aws:iam::${var.aws_account_id}:role/LabRole"
   network_mode             = "awsvpc"
-  cpu                      = "256"
-  memory                   = "512"
+  cpu                      = var.be_cpu
+  memory                   = var.be_memory
   requires_compatibilities = ["FARGATE"]
   container_definitions    = <<TASK_DEFINITION
 [
@@ -70,8 +70,8 @@ resource "aws_ecs_task_definition" "products-task-def" {
   #task_role_arn            = data.lab_user.arn
   execution_role_arn       = "arn:aws:iam::${var.aws_account_id}:role/LabRole"
   network_mode             = "awsvpc"
-  cpu                      = "256"
-  memory                   = "512"
+  cpu                      = var.be_cpu
+  memory                   = var.be_memory
   requires_compatibilities = ["FARGATE"]
   container_definitions    = <<TASK_DEFINITION
 [
@@ -104,8 +104,8 @@ resource "aws_ecs_task_definition" "orders-task-def" {
   #task_role_arn            = data.lab_user.arn
   execution_role_arn       = "arn:aws:iam::${var.aws_account_id}:role/LabRole"
   network_mode             = "awsvpc"
-  cpu                      = "256"
-  memory                   = "512"
+  cpu                      = var.be_cpu
+  memory                   = var.be_memory
   requires_compatibilities = ["FARGATE"]
   container_definitions    = <<TASK_DEFINITION
 [
