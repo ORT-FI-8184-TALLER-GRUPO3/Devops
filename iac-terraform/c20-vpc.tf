@@ -16,6 +16,13 @@ resource "aws_subnet" "vpc-ecs-public-subnet-1" {
   map_public_ip_on_launch = true
 }
 
+resource "aws_subnet" "vpc-ecs-public-subnet-2" {
+  vpc_id = aws_vpc.vpc-ecs.id
+  cidr_block = "10.0.2.0/24"
+  availability_zone = var.availability_zone_2
+  map_public_ip_on_launch = true
+}
+
 
 # Resource-3: Crear Internet Gateway
 resource "aws_internet_gateway" "vpc-ecs-igw" {
@@ -36,10 +43,17 @@ resource "aws_route" "vpc-ecs-public-route" {
 
 
 # Resource-6: Asociar Route Table con la Subnet
-resource "aws_route_table_association" "vpc-ecs-public-route-table-associate" {
+resource "aws_route_table_association" "vpc-ecs-public-route-table-associate-1" {
   route_table_id = aws_route_table.vpc-ecs-public-route-table.id 
   subnet_id = aws_subnet.vpc-ecs-public-subnet-1.id
 }
+
+resource "aws_route_table_association" "vpc-ecs-public-route-table-associate-2" {
+  route_table_id = aws_route_table.vpc-ecs-public-route-table.id 
+  subnet_id = aws_subnet.vpc-ecs-public-subnet-2.id
+}
+
+
 
 # Resource-7: Crear Security Group
 resource "aws_security_group" "ecs-vpc-sg" {

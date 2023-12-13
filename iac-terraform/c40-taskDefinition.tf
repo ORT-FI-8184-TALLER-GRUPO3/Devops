@@ -63,8 +63,9 @@ TASK_DEFINITION
   }
 }
 
-resource "aws_ecs_task_definition" "orders-task-def" {
-  family                   = "orders-task-def"
+
+resource "aws_ecs_task_definition" "products-task-def" {
+  family                   = "products-task-def"
   task_role_arn            = "arn:aws:iam::${var.aws_account_id}:role/LabRole"
   #task_role_arn            = data.lab_user.arn
   execution_role_arn       = "arn:aws:iam::${var.aws_account_id}:role/LabRole"
@@ -75,8 +76,8 @@ resource "aws_ecs_task_definition" "orders-task-def" {
   container_definitions    = <<TASK_DEFINITION
 [
   {
-    "name": "orders-service",
-    "image": "${var.aws_account_id}.dkr.ecr.us-east-1.amazonaws.com/ecr-orders-service:orders-service-dev",
+    "name": "products-service",
+    "image": "${var.aws_account_id}.dkr.ecr.us-east-1.amazonaws.com/ecr-products-service:products-service-dev",
     "essential": true,
     "portMappings": [
       {
@@ -95,8 +96,10 @@ TASK_DEFINITION
   }
 }
 
-resource "aws_ecs_task_definition" "products-task-def" {
-  family                   = "products-task-def"
+#Microservicio Orders debe levantarse despues de tener disponibles las URL de sus dependencias
+resource "aws_ecs_task_definition" "orders-task-def" {
+   depends_on = [aws_lb.payments, aws_lb.shipping, aws_lb.products]
+  family                   = "orders-task-def"
   task_role_arn            = "arn:aws:iam::${var.aws_account_id}:role/LabRole"
   #task_role_arn            = data.lab_user.arn
   execution_role_arn       = "arn:aws:iam::${var.aws_account_id}:role/LabRole"
@@ -107,9 +110,12 @@ resource "aws_ecs_task_definition" "products-task-def" {
   container_definitions    = <<TASK_DEFINITION
 [
   {
-    "name": "products-service",
-    "image": "${var.aws_account_id}.dkr.ecr.us-east-1.amazonaws.com/ecr-products-service:products-service-dev",
+    "name": "orders-service",
+    "image": "${var.aws_account_id}.dkr.ecr.us-east-1.amazonaws.com/ecr-orders-service:orders-service-dev",
     "essential": true,
+    "environment" : [
+        { "name": "APP_ARGS", "value": "http://${aws_lb.payments.dns_name} http://${aws_lb.shipping.dns_name} http://${aws_lb.products.dns_name}" }
+    ],
     "portMappings": [
       {
         "containerPort": 8080,

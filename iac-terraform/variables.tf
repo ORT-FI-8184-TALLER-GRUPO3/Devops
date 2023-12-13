@@ -28,6 +28,12 @@ variable "availability_zone_1" {
   default     = "us-east-1a"
 }
 
+variable "availability_zone_2" {
+  description = "zona de disponibidad 2"
+  type        = string
+  default     = "us-east-1b"
+}
+
 variable "creoECRs" {
   description = "condicional para crear ECRr para cada repositorio de BE"
   type        = bool
@@ -47,4 +53,5 @@ variable "aws_account_id" {
   type        = string
   default     = "556390483751"
 }
+
 
