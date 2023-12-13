@@ -4,7 +4,7 @@ on:
   workflow_call:
 
 env:
-  GH_TOKEN: ${{ secrets.Devops2023 }}
+  GH_TOKEN: ${{ github.token }}
   POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
   REPO_NAME: ${{ github.event.repository.name }}
   APP_ARGS: 'http://localhost:8081 http://localhost:8082 http://localhost:8083'
