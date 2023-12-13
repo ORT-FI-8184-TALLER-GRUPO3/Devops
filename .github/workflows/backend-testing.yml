@@ -63,5 +63,5 @@ jobs:
         run: 
           pwd &
           ls &
-          newman run testing-backend-service.json
-#          postman collection run TestingBackend/testing-backend-service.json
+          cat testing-backend-service.json &
+          postman collection run TestingBackend/testing-backend-service.json
