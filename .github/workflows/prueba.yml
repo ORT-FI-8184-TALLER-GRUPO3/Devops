@@ -62,4 +62,5 @@ jobs:
       - name: Run Postman CLI backend testing
 #        run: postman collection run testing-backend-service.json
         run: |
+          ls&
           docker run -v $(pwd)/test:/etc/newman -t postman/newman:latest run "testing-backend-service.json" --reporters="cli"
