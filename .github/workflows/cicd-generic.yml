@@ -16,6 +16,18 @@ on:
       SONAR_PROJECT:
         required: true
         type: string
+      secrets:
+      AWS_ACCESS_KEY_ID:
+        required: true
+      AWS_DEFAULT_REGION:
+        required: true
+      AWS_SECRET_ACCESS_KEY:
+        required: true
+      AWS_SESSION_TOKEN:
+        required: true
+      SONAR_TOKEN:
+        required: true
+
 
 jobs:
 #  SonarTest:
@@ -51,7 +63,7 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-        aws-region: ${{ vars.AWS_DEFAULT_REGION }}
+        aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
 
     # Login a Amazon ECR
     - name: Login to Amazon ECR
