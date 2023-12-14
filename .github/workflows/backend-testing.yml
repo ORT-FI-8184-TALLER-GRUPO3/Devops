@@ -54,7 +54,16 @@ jobs:
               cd .. 
               java -jar target/${{ env.SERVICE_NAME }}-0.0.1-SNAPSHOT-spring-boot.jar http://localhost:8886 http://localhost:8887 http://localhost:8888 --server.port=8885&
               sleep 5
-          fi    
+          fi  
+
+          run: |
+          CONTAINER_NAME=$(docker ps -q --filter "ancestor=nombre-de-tu-imagen" --format "{{.Names}}")
+          echo "Nombre del contenedor: $CONTAINER_NAME"
+          docker exec -it $CONTAINER_NAME curl -s http://localhost:8885/health
+          docker exec -it $CONTAINER_NAME curl -s http://localhost:8886/health
+          docker exec -it $CONTAINER_NAME curl -s http://localhost:8887/health
+          docker exec -it $CONTAINER_NAME curl -s http://localhost:8888/health
+                    
           run: |
           curl -H 'Authorization: token ${{ env.GH_TOKEN }}' \
           -H 'Accept: application/vnd.github.v3.raw' \
