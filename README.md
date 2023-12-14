@@ -47,6 +47,7 @@ Por parte de la directiva se propuso la implementación de un modelo DevOps como
 
 
 ## Solución planteada ante la problemática
+
 **Puntos clave**
 
 
@@ -120,6 +121,7 @@ Los archivos de iac se encuentran dentro de un único directorio llamado iac-ter
 <img src = "./extras/Diagramacicd.jpg" width=100%>
 </p>
 <br>
+
 **Backend**
 
 
@@ -200,6 +202,7 @@ Esta herramienta proporciona un dashboard intuitivo que muestra de manera clara 
 <img src = "./extras/SonarCloud.png" width=100%>
 </p>
 <br>
+
 ### Interpretación de los resultados de SonarCloud
 
 Se procedió a leer los informes que genera la herramienta de análisis estático de código.
@@ -271,16 +274,19 @@ El uso del tablero Kanban en Trello también permitió al equipo visualizar el f
 <img src = "./extras/Semana1.jpg" width=100%>
 </p>
 <br>
+
 **Segunda semana:** 
 <p align = "center">
 <img src = "./extras/Semana2.jpg" width=100%>
 </p>
 <br>
+
 **Tercera semana:** 
 <p align = "center">
 <img src = "./extras/Semana3.jpg" width=100%>
 </p>
 <br>
+
 **Cuarta semana:** 
 <p align = "center">
 <img src = "./extras/Semana4.png" width=100%>
