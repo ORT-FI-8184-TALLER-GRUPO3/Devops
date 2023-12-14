@@ -34,7 +34,7 @@ jobs:
           if [ "${{env.REPO_NAME}}" != "orders-service" ]; then
               pwd 
               ls
-              java -jar ${{ env.REPO_NAME }}.jar         
+              java -jar ${{ env.REPO_NAME }}-0.0.1-SNAPSHOT..jar         
               mvn -f ${{env.REPO_NAME}}/ -B package
               java -jar ${{env.REPO_NAME}}/target/${{env.REPO_NAME}}-0.0.1-SNAPSHOT.jar --server.port=8081 &
           else
