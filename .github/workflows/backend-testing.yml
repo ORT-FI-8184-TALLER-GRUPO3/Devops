@@ -60,10 +60,10 @@ jobs:
           ls
           CONTAINER_NAME=$(docker ps -q --filter "ancestor=nombre-de-tu-imagen" --format "{{.Names}}")
           echo "Nombre del contenedor: $CONTAINER_NAME"
-          docker exec -it $CONTAINER_NAME curl -s http://localhost:8885/health
-          docker exec -it $CONTAINER_NAME curl -s http://localhost:8886/health
-          docker exec -it $CONTAINER_NAME curl -s http://localhost:8887/health
-          docker exec -it $CONTAINER_NAME curl -s http://localhost:8888/health
+          docker exec -it $CONTAINER_NAME curl -s http://localhost:8081/health
+          docker exec -it $CONTAINER_NAME curl -s http://localhost:8082/health
+          docker exec -it $CONTAINER_NAME curl -s http://localhost:8083/health
+          docker exec -it $CONTAINER_NAME curl -s http://localhost:8084/health
       
       - name: Install Postman CLI
         run: curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
