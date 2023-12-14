@@ -82,6 +82,10 @@ Esto nos ayuda a garantizar una entrega continua de software de alta calidad, ma
 
 ## Estrategia para CI/CD 
 
+<p align = "center">
+<img src = "./extras/Diagramacicd.jpg" width=100%>
+</p>
+
 **Backend**
 
 El proceso de integración y despliegue continuo fue realizado mediante **GitHub Actions** e implementado en el repositorio de **DevOps**, de esta manera centraliza y estandariza el ciclo de vida del software de los microservicios del backend. Esta arquitectura de CI/CD permite a cada microservicio del backend invocar un workflow genérico **"cicd-generic.yml"**, ya que su lógica es similar pero a su vez proporcionando parámetros específicos que adaptan la ejecución a sus necesidades individuales.
