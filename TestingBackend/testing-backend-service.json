@@ -55,9 +55,9 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8084/orders",
+					"raw": "http://localhost:8080/orders",
 					"host": [
-						"http://localhost:8084"
+						"http://localhost:8080"
 					],
 					"path": [
 						"orders"
