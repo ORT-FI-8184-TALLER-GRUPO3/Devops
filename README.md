@@ -216,13 +216,13 @@ vulnerabilidades: 2: básicamente consiste en construir elementos en base a la e
 - Code smells: 3 son por inconsistencias en el nombrado de las variables, 3 por un correcto formateo al realizar concatenaciones de strings y alguna de refactorización
 	
 **products-service:**
-- code smalls: 6: problemas al formatear concatenados de strings, definición de un strings 3 veces en vez de reutilizarlo, generalizar el tipos de variable utilizando tipos de variable no tan específicos, otros
+- code smells: 6: problemas al formatear concatenados de strings, definición de un strings 3 veces en vez de reutilizarlo, generalizar el tipos de variable utilizando tipos de variable no tan específicos, otros
 
 **shipping-service:**
 - 8 code smells: en general es una reiteración de problemas ya vistos en los servicios anteriores.
 	 
 **Webapp (frontend):** 
-- 4 code smels, 3 para limpiar el código por importaciones de librerías que no se usan y una recomendación para hacer el código más entendible y mantenible.
+- 4 code smells, 3 para limpiar el código por importaciones de librerías que no se usan y una recomendación para hacer el código más entendible y mantenible.
 
 	
 **Recomendaciones:**
@@ -238,7 +238,7 @@ vulnerabilidades: 2: básicamente consiste en construir elementos en base a la e
 En el contexto de DevOps, la automatización y la integración del testing se convierten en elementos clave. Este enfoque garantiza la ejecución sistemática de pruebas en los desarrollos recientes, proporcionándonos un feedback continuo y rápido sobre el trabajo. 
 La automatización no solo actúa como un test de regresión para el código existente, sino que también fortalece la confianza en el proceso de despliegue. Confiamos en que el testing actúe como un escudo protector, evitando la introducción de problemas no deseados en el entorno de producción.
 
-Dado el tipo de software y codigo con el cual se trabajo evaluamos realizar pruebas de Integración sobre los micro servicios de backend específicamente pruebas de endpoint.
+Dado el tipo de software y código con el cual se trabajo evaluamos realizar pruebas de Integración sobre los micro servicios de backend específicamente pruebas de endpoint.
 Las pruebas de integración verifican que los diferentes componentes o módulos de una aplicación funcionen correctamente cuando se integran. Garantizan la coherencia y la interacción adecuada entre las partes del sistema.
 
 Las pruebas de endpoint se realizan para validar la comunicación adecuada entre las diversas partes de una aplicación o sistema. Esto incluye verificar que los endpoints de la API respondan correctamente a las solicitudes, manejen los parámetros de entrada correctamente y devuelvan los resultados esperados.
