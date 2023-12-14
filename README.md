@@ -90,4 +90,39 @@ La utilización de un workflow genérico para el backend facilita la gestión de
 
 Esta estrategia desacopla el proceso de CI/CD de los repositorios individuales de los microservicios y centraliza la lógica de integración y despliegue en un único lugar. Al proteger la lógica dentro del repositorio de DevOps, se asegura la integridad del flujo de trabajo e idealmente simplifica la gestión de los secretos y configuraciones (vale aclarar, que inicialmente no se tenía ésta estructura y se utilizaba los secretos en cada repositorio individual, al transformar y mudar el flujo de trabajo, se decidio utilizar secrets: inherit en los llamadores para pasarle dicha información al workflow reutilizable ya que no se disponía de mucho tiempo extra para ajustar, pero entendemos que para que la coherencia exista en este tipo de solución, dichos secretos se tendrían que haber mudado al repositorio de Devops por cuestiones de escalabilidad y seguridad). Además, esta abstracción permite que los equipos de desarrollo se enfoquen en el desarrollo de características y correcciones, confiando en que el proceso de CI/CD se maneja de manera consistente y segura desde un solo punto de control.
 
-La automatización del pipeline fomenta la eficiencia y la cohesión entre los equipos, reduciendo la redundancia y los errores manuales, y promoviendo un ambiente de trabajo más ágil y enfocado en la entrega de valor continuo. Con esta implementación, se abraza el espíritu de DevOps de colaboración y mejora continua, mientras se mantiene una infraestructura robusta y adaptable a los cambios rápidos y constantes del desarrollo de software moderno.
+La automatización del pipeline fomenta la eficiencia y la cohesión entre los equipos, reduciendo la redundancia y los errores manuales, y promoviendo un ambiente de trabajo más ágil y enfocado en la entrega de valor continuo. Con esta implementación, se abraza el espíritu de DevOps de colaboración y mejora continua, mientras se mantiene una infraestructura robusta y adaptable a los cambios rápidos y constantes del desarrollo de software moderno. A continuación se presenta un diagrama del pipeline:
+
+<p align = "center">
+<img src = "./extras/devop-flow-backend.png" width=100%>
+</p>
+
+## Planificación y seguimiento de tareas
+
+En el marco del proyecto, se implementó la metodología ágil a través del uso de un **tablero Kanban** para el seguimiento de las tareas asignadas a cada integrante del equipo. Para la gestión y organización de estas tareas se optó por utilizar **Trello**, una herramienta que, a pesar de sus limitaciones en la creación de subtareas, proporciona una interfaz intuitiva y fácil de manejar que favorece la colaboración y el seguimiento en tiempo real del progreso del trabajo.
+
+La limitación de Trello en cuanto a la creación de subtareas se solucionó mediante un enfoque creativo: cada tarjeta principal contenía una **checklist**, dentro de la cual se incluían enlaces a otras sub-tarjetas correspondientes a tareas más específicas. Este método permitió desglosar las tareas complejas en partes más manejables y asignar responsabilidades claras a cada integrante, facilitando así la gestión del trabajo y permitiendo una visión más detallada del avance de cada componente del proyecto.
+
+El uso del tablero Kanban en Trello también permitió al equipo visualizar el flujo de trabajo desde la planificación hasta la entrega, identificar cuellos de botella, priorizar tareas y fomentar una mentalidad de mejora continua. A continuación se hace evidencia de su progreso en el transcurso de las semanas (vale aclarar que dichas screenshots fueron tomadas en el correr de la semana de trabajo y por eso no hay una inical con todo en el backlog ni una final con todo en hecho):
+
+**Primera semana:** 
+
+<p align = "center">
+<img src = "./extras/Semana1.jpg" width=100%>
+</p>
+
+**Segunda semana:** 
+
+<p align = "center">
+<img src = "./extras/Semana2.jpg" width=100%>
+</p>
+
+**Tercera semana:** 
+<p align = "center">
+<img src = "./extras/Semana3.jpg" width=100%>
+</p>
+
+**Cuarta semana:** 
+
+<p align = "center">
+<img src = "./extras/Semana4.png" width=100%>
+</p>
