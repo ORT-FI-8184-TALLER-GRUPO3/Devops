@@ -155,6 +155,7 @@ Durante el desarrollo del proyecto, nos hemos enfrentado a desafíos que no nos 
 
 ### Estrategia de ramas
 <br>
+
 **Repositorios de Microservicios y la Implementación de GitFlow**
 
 En el desarrollo de microservicios, utilizamos repositorios específicos que albergan tanto el código fuente del servicio como los archivos necesarios para el ciclo de integración continua (CI). Para gestionar eficazmente estos repositorios, implementamos la estrategia de GitFlow. Esta metodología de trabajo con Git se destaca por su riguroso control en el pasaje de cambios entre ramas, asegurando una revisión detallada y una aprobación cuidadosa en cada etapa del desarrollo.
@@ -165,6 +166,7 @@ En nuestra estructura, definimos tres ramas estables: **Dev**, **Prod** y **Test
 <img src = "./extras/gitflow.png" width=100%>
 </p>
 <br>
+
 **Repositorio de DevOps y la Estrategia de Trunk Based** 
 
 En el ámbito de DevOps, adoptamos un enfoque diferente para la gestión de nuestro repositorio, centrándonos en la estrategia de Trunk Based Development. 
