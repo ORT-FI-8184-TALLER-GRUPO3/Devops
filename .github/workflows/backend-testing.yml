@@ -40,7 +40,9 @@ jobs:
               cd ..
           else
               gh repo clone ORT-FI-8184-TALLER-GRUPO3/products-service 
+              ls
               cd products-service          
+              ls
               mvn -f products-service/ -B package
               java -jar products-service/target/products-service.jar --server.port=8081sleep 5
               cd .. 
