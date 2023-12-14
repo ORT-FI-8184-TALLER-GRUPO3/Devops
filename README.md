@@ -80,6 +80,13 @@ Esto nos ayuda a garantizar una entrega continua de software de alta calidad, ma
 <img src = "./extras/trunkbased.png" width=100%>
 </p>
 
+Se evidencia el uso de feature branch en el repositorio de Devops:
+
+<p align = "center">
+<img src = "./extras/feature-branch.jpg" width=100%>
+</p>
+
+
 ## Estrategia para CI/CD 
 
 <p align = "center">
