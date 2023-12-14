@@ -32,25 +32,22 @@ jobs:
       - name: Build Environment
         run: |
           if [ "${{env.REPO_NAME}}" != "orders-service" ]; then
-              gh repo clone ORT-FI-8184-TALLER-GRUPO3/${{env.REPO_NAME}} 
-              cd ${{env.REPO_NAME}}         
+              gh repo clone ORT-FI-8184-TALLER-GRUPO3/${{env.REPO_NAME}}       
               mvn -f ${{env.REPO_NAME}}/ -B package
               java -jar ${{env.REPO_NAME}}/target/${{env.REPO_NAME}}.jar --server.port=8081
-              sleep 5
-              cd ..
           else
               gh repo clone ORT-FI-8184-TALLER-GRUPO3/products-service 
               mvn -f products-service/ -B package
-              java -jar products-service/target/products-service.jar --server.port=8081sleep 5
+              java -jar products-service/target/products-service.jar --server.port=8081
 
               gh repo clone ORT-FI-8184-TALLER-GRUPO3/shipping-service        
               mvn -f shipping-service/ -B package
-              java -jar shipping-service/target/shipping-service.jar --server.port=8082sleep 5
+              java -jar shipping-service/target/shipping-service.jar --server.port=8082
 
               gh repo clone ORT-FI-8184-TALLER-GRUPO3/payments-service   
               cd payments-service
               mvn -f payments-service/ -B package
-              java -jar payments-service/target/payments-service.jar --server.port=8083sleep 5
+              java -jar payments-service/target/payments-service.jar --server.port=8083
 
               gh repo clone ORT-FI-8184-TALLER-GRUPO3/${{env.REPO_NAME}}
               cd ${{env.REPO_NAME}}
@@ -59,6 +56,8 @@ jobs:
           fi    
       - name: control
         run: |
+          pwd
+          ls
           CONTAINER_NAME=$(docker ps -q --filter "ancestor=nombre-de-tu-imagen" --format "{{.Names}}")
           echo "Nombre del contenedor: $CONTAINER_NAME"
           docker exec -it $CONTAINER_NAME curl -s http://localhost:8885/health
@@ -85,6 +84,4 @@ jobs:
           
       - name: Run Postman CLI backend testing
         run: 
-          pwd &
-          ls &
           postman collection run testing-backend-service.json
