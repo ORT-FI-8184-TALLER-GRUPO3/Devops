@@ -52,7 +52,7 @@ jobs:
 
               gh repo clone ORT-FI-8184-TALLER-GRUPO3/${{env.REPO_NAME}}
               mvn -f ${{env.REPO_NAME}}/ -B package
-              java -jar ${{env.REPO_NAME}}/target/${{env.REPO_NAME}}-0.0.1-SNAPSHOT.jar ${{ env.APP_ARGS }} --server.port=8084 &
+              java -jar ${{env.REPO_NAME}}/target/${{env.REPO_NAME}}-0.0.1-SNAPSHOT.jar ${{ env.APP_ARGS }} --server.port=8080 &
           fi    
       - name: Get JSON file with Postman Collection
         run: |
