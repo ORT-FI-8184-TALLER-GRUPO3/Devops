@@ -123,6 +123,9 @@ La automatización del pipeline fomenta la eficiencia y la cohesión entre los e
 
 **Frontend**
 
+Al igual que backend el flujo de integracion se realiza a traves de **GitHub Actions**, el cual es implementado en el repositorio **DevOps**.
+El mismo se desarrolla al invocar un workflow para cada ambiente: **workflow-dev.yml**, **workflow-test.yml** y **workflow-prod.yml**, es decir que al detectar un pedido de 'pull request' o 'push' sobre el repositorio del frontend, este procede a realizar el proceso CI.
+
 
 
 <p align = "center">
