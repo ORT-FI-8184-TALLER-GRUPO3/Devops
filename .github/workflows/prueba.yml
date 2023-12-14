@@ -65,4 +65,4 @@ jobs:
           
       - name: Run Jar for Functional Testing newman
         run: | 
-          newman run testing-backend-service.json.json
+          newman run testing-backend-service.json
