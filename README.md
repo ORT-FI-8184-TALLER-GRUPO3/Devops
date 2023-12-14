@@ -152,8 +152,9 @@ Durante el desarrollo del proyecto, nos hemos enfrentado a desafíos que no nos 
 <img src = "./extras/devop-flow-frontend.png" width=100%>
 </p>
 <br>
-### Estrategia de ramas
 
+### Estrategia de ramas
+<br>
 **Repositorios de Microservicios y la Implementación de GitFlow**
 
 En el desarrollo de microservicios, utilizamos repositorios específicos que albergan tanto el código fuente del servicio como los archivos necesarios para el ciclo de integración continua (CI). Para gestionar eficazmente estos repositorios, implementamos la estrategia de GitFlow. Esta metodología de trabajo con Git se destaca por su riguroso control en el pasaje de cambios entre ramas, asegurando una revisión detallada y una aprobación cuidadosa en cada etapa del desarrollo.
@@ -184,6 +185,7 @@ Se evidencia el uso de feature branch en el repositorio de Devops:
 <img src = "./extras/feature-branch.jpg" width=100%>
 </p>
 <br>
+
 ## Análisis de código estático
 
 Dentro del proceso de integración y entrega continua (CI/CD) se consideró esencial incorporar prácticas de aseguramiento de la calidad del código. En este contexto, se seleccionó **SonarCloud** como la herramienta de análisis de código estático por excelencia en nuestro proyecto académico ya que SonarCloud se integra de forma eficiente con **GitHub Actions**, lo que permite una ejecución automática del análisis de código estático con cada push o pull request en el ciclo de vida del desarrollo. 
