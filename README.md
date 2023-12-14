@@ -253,7 +253,7 @@ Para el ejemplo planteado pudimos detectar la falla-error 500 para el servicio d
 </p>
 <br>
 
-A medida que avanzaba el proyecto, nos enfrentamos a desafíos que ralentizaron en el avance de esta parte del proyecto, logramos completar el testing para el microservicio orders-service, y pudimos llegar a los siguientes resultados.
+A medida que avanzaba el proyecto, nos enfrentamos a desafíos que ralentizaron en el avance de esta parte del proyecto, logramos completar el testing para el microservicio orders-service, y pudimos llegar a los anteriores resultados.
 Es importante señalar que no fue posible incorporar estas pruebas en el flujo de trabajo de CI/CD, sin embargo incluimos un workflow en github actions dentro del repositorio de orders-service que puede ser ejecutado manualmente y permite obtener resultados.
 
 ## Gestión del proyecto
