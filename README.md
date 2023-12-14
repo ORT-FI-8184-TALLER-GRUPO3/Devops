@@ -69,22 +69,22 @@ La implementación en AWS fue realizada mediante el servicio ECS (Elastic Contai
 Se generaron 3 ambientes distintos (desarrolo, testing y producción)
 A continuación se muestra un diagrama que muestra el despliegue de cada uno de los microservicios de Back-end por cada ambiente.
 
-
+<br>
 <p align = "center">
 <img src = "./extras/Arquitectura_deploy_aws_ms.svg" width=100%>
 </p>
-
+<br>
 
 Los componentes son los siguientes:
 Se generó una VPC en la region us-east-1 por cada ambiente con dos subredes públicas en distintas areas de disponibilidad (us-east-1a y us-east-1b). Estos recursos son compartidos por todos los contenedores de backend en cada ambiente.
 La salida a internet desde la VPC se realiza con un Internet Gateway en conjunto con una tabla de ruteo. Para cada ambiente se generó un Cluster de ECS y luego para cada microservicio desplegado se genera un Application Load Balancer que permite balancear la carga entre las dos subredes, así como también proveer de una IP pública para el acceso desde internet. La cantidad de instancias de contenedor desplegadas se puede especificar por ambiente y se seteo inicialmente en 2 para el ambiente de producción, donde tiene sentido aplicar el balanceo de carga y se asegura una alta disponibilidad y en 1 para los ambientes de desarrollo y testing. Si bien no tiene mucho sentido aplicar el balanceador de carga hacia una unica instancia de todos modos es util por la utilización de las IP públicas para resolver la dependencia del MS de orders.
 Como elemento complementario para el despliegue dentro de la nube y de interacción con pipelines de CI/CD se generaron los recursos de ECR (Elastic Container Registry) y se optó por utilizar uno por cada servicio. Esto permite mantener una independencia entre MS y facilita la utlización de tags para las imagenes subidas a los mismos. En cada uno de estos registros se va a utilizar un tag por cada ambiente y quedan representados de esta manera en la infraestructura:
 
-
+<br>
 <p align = "center">
 <img src = "./extras/ECRporMS.svg" width=100%>
 </p>
-
+<br>
 
 Por último también se generaró la infraestructura para desplegar el frontend para lo cual se utilizó un S3 Bucket por ambiente. La elección se debe a que el contenido a desplegar es estático y utilizar un S3 Bucket público es una manera económica de permitir su consumo y evitar soluciones más complejas como levantar una instancia de EC2 con un webserver o algún contenedor en ECS, y de alguna manera también trasferir el costo adminsitrativo de mantener el contenido en linea.  
  
@@ -115,11 +115,11 @@ Los archivos de iac se encuentran dentro de un único directorio llamado iac-ter
 
 
 ### Estrategia para CI/CD 
-
+<br>
 <p align = "center">
 <img src = "./extras/Diagramacicd.jpg" width=100%>
 </p>
-
+<br>
 **Backend**
 
 
@@ -131,11 +131,11 @@ Esta estrategia desacopla el proceso de CI/CD de los repositorios individuales d
 
 La automatización del pipeline fomenta la eficiencia y la cohesión entre los equipos, reduciendo la redundancia y los errores manuales, y promoviendo un ambiente de trabajo más ágil y enfocado en la entrega de valor continuo. Con esta implementación, se abraza el espíritu de DevOps de colaboración y mejora continua, mientras se mantiene una infraestructura robusta y adaptable a los cambios rápidos y constantes del desarrollo de software moderno. A continuación se presenta un diagrama del pipeline:
 
-
+<br>
 <p align = "center">
 <img src = "./extras/devop-flow-backend.png" width=100%>
 </p>
-
+<br>
 
 **Frontend**
 
@@ -147,11 +147,11 @@ Durante el desarrollo del proyecto, nos hemos enfrentado a desafíos que no nos 
 
 
 
-
+<br>
 <p align = "center">
 <img src = "./extras/devop-flow-frontend.png" width=100%>
 </p>
-
+<br>
 ### Estrategia de ramas
 
 **Repositorios de Microservicios y la Implementación de GitFlow**
@@ -159,11 +159,11 @@ Durante el desarrollo del proyecto, nos hemos enfrentado a desafíos que no nos 
 En el desarrollo de microservicios, utilizamos repositorios específicos que albergan tanto el código fuente del servicio como los archivos necesarios para el ciclo de integración continua (CI). Para gestionar eficazmente estos repositorios, implementamos la estrategia de GitFlow. Esta metodología de trabajo con Git se destaca por su riguroso control en el pasaje de cambios entre ramas, asegurando una revisión detallada y una aprobación cuidadosa en cada etapa del desarrollo.
 
 En nuestra estructura, definimos tres ramas estables: **Dev**, **Prod** y **Test**. Cada una de estas ramas cumple un papel específico y crítico en el ciclo de vida del software. A continuación, se presenta un diagrama detallado que ilustra el flujo de trabajo que seguimos, resaltando cómo GitFlow facilita una gestión más ordenada y controlada de los cambios en nuestros repositorios de microservicios.
-
+<br>
 <p align = "center">
 <img src = "./extras/gitflow.png" width=100%>
 </p>
-
+<br>
 **Repositorio de DevOps y la Estrategia de Trunk Based** 
 
 En el ámbito de DevOps, adoptamos un enfoque diferente para la gestión de nuestro repositorio, centrándonos en la estrategia de Trunk Based Development. 
@@ -173,17 +173,17 @@ Esta metodología se basa en la idea de mantener una línea principal de desarro
 Esta forma de trabajar se alinea perfectamente con los principios de integración y despliegue continuos ya nos permite mantener un flujo de trabajo ágil y eficiente, acorde con los objetivos de rapidez y eficacia propios de las prácticas de DevOps.
 
 Esto nos ayuda a garantizar una entrega continua de software de alta calidad, manteniendo un enfoque colaborativo y dinámico en la gestión. A continuación, presentamos un diagrama que ilustra este proceso con una rama efímera feature.
-
+<br>
 <p align = "center">
 <img src = "./extras/trunkbased.png" width=100%>
 </p>
-
+<br>
 Se evidencia el uso de feature branch en el repositorio de Devops:
-
+<br>
 <p align = "center">
 <img src = "./extras/feature-branch.jpg" width=100%>
 </p>
-
+<br>
 ## Análisis de código estático
 
 Dentro del proceso de integración y entrega continua (CI/CD) se consideró esencial incorporar prácticas de aseguramiento de la calidad del código. En este contexto, se seleccionó **SonarCloud** como la herramienta de análisis de código estático por excelencia en nuestro proyecto académico ya que SonarCloud se integra de forma eficiente con **GitHub Actions**, lo que permite una ejecución automática del análisis de código estático con cada push o pull request en el ciclo de vida del desarrollo. 
@@ -191,11 +191,11 @@ Dentro del proceso de integración y entrega continua (CI/CD) se consideró esen
 Esta integración es clave en el flujo de trabajo de DevOps, ya que promueve la identificación rápida de problemas y la retroalimentación continua, facilitando así la entrega de software de alta calidad. Una consideración a resaltar de SonarCloud fue que su modelo de uso gratuito, exige que los repositorios sean públicos. Aunque esto podría ser una restricción para proyectos que manejan información sensible, en el contexto de nuestro proyecto académico, donde la transparencia y la colaboración son fundamentales, este requisito no representa un inconveniente. 
 
 Esta herramienta proporciona un dashboard intuitivo que muestra de manera clara las métricas de calidad, lo que facilita su interpretación y permite tomar acciones correctivas de manera informada y ágil. Su utilización contribuye a elevar los estándares de calidad del software desarrollado y a formar desarrolladores conscientes de las mejores prácticas de codificación. A continuación se evidencia dicho dashboard:
-
+<br>
 <p align = "center">
 <img src = "./extras/SonarCloud.png" width=100%>
 </p>
-
+<br>
 ### Interpretación de los resultados de SonarCloud
 
 Se procedió a leer los informes que genera la herramienta de análisis estático de código.
@@ -241,11 +241,16 @@ Las pruebas de endpoint se realizan para validar la comunicación adecuada entre
 
 De las pruebas realizadas pudimos detectar las siguientes resultados(imagen debajo).
 
+Para el ejemplo planteado pudimos detectar la falla-error 500 para el servicio de orders-service, el error en cuestión pudo darse al momento de hacer el build, o con el archivo de docker al construir la imagen.
 
-
+<br>
 <p align = "center">
 <img src = "./extras/backend_testing.png" width=100%>
 </p>
+<br>
+
+A medida que avanzaba el proyecto, nos enfrentamos a desafíos que ralentizaron en el avance de esta parte del proyecto, logramos completar el testing para el microservicio orders-service, y pudimos llegar a los siguientes resultados.
+Es importante señalar que no fue posible incorporar estas pruebas en el flujo de trabajo de CI/CD, sin embargo incluimos un workflow en github actions dentro del repositorio de orders-service que puede ser ejecutado manualmente y permite obtener resultados.
 
 ## Gestión del proyecto
 
@@ -258,26 +263,23 @@ La limitación de Trello en cuanto a la creación de subtareas se solucionó med
 El uso del tablero Kanban en Trello también permitió al equipo visualizar el flujo de trabajo desde la planificación hasta la entrega, identificar cuellos de botella, priorizar tareas y fomentar una mentalidad de mejora continua. A continuación se hace evidencia de su progreso en el transcurso de las semanas (vale aclarar que dichas screenshots fueron tomadas en el correr de la semana de trabajo y por eso no hay una inical con todo en el backlog ni una final con todo en hecho):
 
 **Primera semana:** 
-
 <p align = "center">
 <img src = "./extras/Semana1.jpg" width=100%>
 </p>
-
+<br>
 **Segunda semana:** 
-
 <p align = "center">
 <img src = "./extras/Semana2.jpg" width=100%>
 </p>
-
+<br>
 **Tercera semana:** 
 <p align = "center">
 <img src = "./extras/Semana3.jpg" width=100%>
 </p>
-
+<br>
 **Cuarta semana:** 
-
 <p align = "center">
 <img src = "./extras/Semana4.png" width=100%>
 </p>
-
+<br>
 
