@@ -20,11 +20,12 @@ on:
 
 jobs:
   SonarAnalysis:
-    uses: ./.github/workflows/sonarscan_backends.yml
-    with:
-      SONAR_PROJECT: ${{ inputs.SONAR_PROJECT }}  
-    secrets:
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: SonarAnalysis
+        run: |
+          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }}  
+      
       
 #  RunsBackendTest:
 #    needs: SonarAnalysis
