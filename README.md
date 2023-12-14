@@ -41,7 +41,6 @@ La problemática principal de esta empresa en el sector retail radica en la nece
 
 Por parte de la directiva se propuso la implementación de un modelo DevOps como solución para acelerar el "time-to-market" y mejorar la calidad del software, aprovechando al máximo las ventajas de la nube. Esta estrategia busca no solo mejorar la agilidad en el desarrollo y la calidad del software, sino también lograr una mayor eficiencia operativa para mantener la competitividad.
 
-## Análisis de requerimientos
 
 ## Solución planteada ante la problemática
 **Puntos clave**
