@@ -54,7 +54,7 @@ Desmenuzando el objetivo central planteado en el Abstract, el equipo se plantea 
 4. Gestionar microservicios empaquetados en contenedores, para su despliegue en un sistema de orquestación en la nube de AWS, específicamente utilizando imágenes Docker en ECS Fargate.
 5. Mantener una eficiencia óptima en las prácticas de las metodologías ágiles, con el fin de ofrecer una solución que potencie tanto la calidad como la velocidad de los procesos.
 
-##Estrategia de ramas
+## Estrategia de ramas
 
 **Repositorios de Microservicios y la Implementación de GitFlow**
 
@@ -80,7 +80,7 @@ Esto nos ayuda a garantizar una entrega continua de software de alta calidad, ma
 <img src = "./extras/trunkbased.png" width=100%>
 </p>
 
-##Estrategia para CI/CD 
+## Estrategia para CI/CD 
 
 **Backend**
 
