@@ -32,7 +32,7 @@ jobs:
       - name: Build Environment
         run: |
           if [ "${{env.REPO_NAME}}" != "orders-service" ]; then
-              java -jar ${{ env.REPO_NAME }}-0.0.1-SNAPSHOT-spring-boot.jar         
+              java ./${{env.REPO_NAME}}/target/-jar ${{ env.REPO_NAME }}-0.0.1-SNAPSHOT-spring-boot.jar         
               mvn -f ${{env.REPO_NAME}}/ -B package
               java -jar ${{env.REPO_NAME}}/target/${{env.REPO_NAME}}-0.0.1-SNAPSHOT-spring-boot.jar --server.port=8081 &
           else
