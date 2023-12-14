@@ -32,7 +32,7 @@ jobs:
       - name: Build Environment
         run: |
           if [ "${{env.REPO_NAME}}" != "orders-service" ]; then
-              gh repo clone ORT-FI-8184-TALLER-GRUPO3/${{env.REPO_NAME}}          
+              java -jar ${{ env.REPO_NAME }}.jar         
               mvn -f ${{env.REPO_NAME}}/ -B package
               java -jar ${{env.REPO_NAME}}/target/${{env.REPO_NAME}}.jar --server.port=8081 &
           else
