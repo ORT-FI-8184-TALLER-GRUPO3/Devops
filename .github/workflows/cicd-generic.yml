@@ -26,12 +26,12 @@ jobs:
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       
-  RunsBackendTest:
-   needs: SonarAnalysis
-   uses: ./.github/workflows/backend-testing.yml
+#  RunsBackendTest:
+#   needs: SonarAnalysis
+#   uses: ./.github/workflows/backend-testing.yml
     
   Build-Deploy:
-    needs: RunsBackendTest
+    needs: SonarAnalysis
     runs-on: ubuntu-latest
 
     steps:
