@@ -121,6 +121,14 @@ La automatización del pipeline fomenta la eficiencia y la cohesión entre los e
 <img src = "./extras/devop-flow-backend.png" width=100%>
 </p>
 
+**Frontend**
+
+
+
+<p align = "center">
+<img src = "./extras/devop-flow-frontend.png" width=100%>
+</p>
+
 ### Estrategia de ramas
 
 **Repositorios de Microservicios y la Implementación de GitFlow**
