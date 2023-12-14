@@ -32,37 +32,27 @@ jobs:
       - name: Build Environment
         run: |
           if [ "${{env.REPO_NAME}}" != "orders-service" ]; then
-              gh repo clone ORT-FI-8184-TALLER-GRUPO3/${{env.REPO_NAME}}       
+              gh repo clone ORT-FI-8184-TALLER-GRUPO3/${{env.REPO_NAME}}          
               mvn -f ${{env.REPO_NAME}}/ -B package
-              java -jar ${{env.REPO_NAME}}/target/${{env.REPO_NAME}}-example-0.0.1-SNAPSHOT.jar --server.port=8081
+              java -jar ${{env.REPO_NAME}}/target/${{env.REPO_NAME}}.jar --server.port=8081
           else
-              gh repo clone ORT-FI-8184-TALLER-GRUPO3/products-service 
-              mvn -f products-service/ -B package
-              java -jar products-service/target/products-service-example-0.0.1-SNAPSHOT.jar --server.port=8081
+              gh repo clone ORT-FI-8184-TALLER-GRUPO3/${service}-service           
+              mvn -f ${service}-service/ -B package
+              java -jar ${service}-service/target/${service}-service.jar --server.port=8081
 
-              gh repo clone ORT-FI-8184-TALLER-GRUPO3/shipping-service        
-              mvn -f shipping-service/ -B package
-              java -jar shipping-service/target/shipping-service-example-0.0.1-SNAPSHOT.jar --server.port=8082
+              gh repo clone ORT-FI-8184-TALLER-GRUPO3/${service}-service           
+              mvn -f ${service}-service/ -B package
+              java -jar ${service}-service/target/${service}-service.jar --server.port=8082
 
-              gh repo clone ORT-FI-8184-TALLER-GRUPO3/payments-service  
-              mvn -f payments-service/ -B package
-              java -jar payments-service/target/payments-service-example-0.0.1-SNAPSHOT.jar --server.port=8083
+              gh repo clone ORT-FI-8184-TALLER-GRUPO3/${service}-service           
+              mvn -f ${service}-service/ -B package
+              java -jar ${service}-service/target/${service}-service.jar --server.port=8083
 
               gh repo clone ORT-FI-8184-TALLER-GRUPO3/${{env.REPO_NAME}}
               mvn -f ${{env.REPO_NAME}}/ -B package
-              java -jar ${{env.REPO_NAME}}-service/target/${{env.REPO_NAME}}-example-0.0.1-SNAPSHOT.jar ${{ env.APP_ARGS }} --server.port=8084
+              java -jar ${{env.REPO_NAME}}/target/${{env.REPO_NAME}}.jar ${{ env.APP_ARGS }} --server.port=8084
           fi    
-      - name: control
-        run: |
-          pwd
-          ls
-          CONTAINER_NAME=$(docker ps -q --filter "ancestor=nombre-de-tu-imagen" --format "{{.Names}}")
-          echo "Nombre del contenedor: $CONTAINER_NAME"
-          docker exec -it $CONTAINER_NAME curl -s http://localhost:8081/health
-          docker exec -it $CONTAINER_NAME curl -s http://localhost:8082/health
-          docker exec -it $CONTAINER_NAME curl -s http://localhost:8083/health
-          docker exec -it $CONTAINER_NAME curl -s http://localhost:8084/health
-      
+
       - name: Install Postman CLI
         run: curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
 
@@ -74,12 +64,8 @@ jobs:
           curl -H 'Authorization: token ${{ env.GH_TOKEN }}' \
           -H 'Accept: application/vnd.github.v3.raw' \
           -O -L 'https://raw.githubusercontent.com/ORT-FI-8184-TALLER-GRUPO3/Devops/main/TestingBackend/testing-backend-service.json'
-     
-      - name: Obtener IP del Host
-        run: |
-          HOST_IP=$(ip route show default | awk '/default/ {print $3}')
-          echo "La IP del host es: $HOST_IP"
-          
+
       - name: Run Postman CLI backend testing
         run: 
           postman collection run testing-backend-service.json
+
