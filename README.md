@@ -20,7 +20,7 @@ Entregado como requisito para la obtención de la certificación en Devops.
 
 
 
-Rafael Fernández -<br>
+Rafael Fernández - 287127<br>
 Maximiliano Migues - 205973<br>
 Matias Techeira - 176519<br>
 
@@ -118,6 +118,40 @@ Esta herramienta proporciona un dashboard intuitivo que muestra de manera clara 
 <p align = "center">
 <img src = "./extras/SonarCloud.png" width=100%>
 </p>
+
+### Interpretación de los resultados de SonarCloud
+
+Se procedió a leer los informes que genera la herramienta de análisis estático de código.
+A continuación, se muestra un resumen de los hallazgos de la herramienta en cada uno de los repositorios y que se califican en cuatro categorías: Buh, code smells, vulnerabildiades y security hotspots.
+
+**payments-service:** 
+	
+- Bugs: 1: Sonar detectó como bug que la forma en la que se está generando y utilizando un número randómico. Esto mismo también lo detectó como security hotspot. 
+- Code smells: 4: En general el análisis detectó algunas sentencias de código deberían hacerse de otra forma, como por ejemplo formateos en la salida de logs y un cambio en el uso de una anotación para la inyección.
+
+**orders-service:** 
+- Bugs: 1: Posibilidad de lanzamiento de null pointer exception.
+vulnerabilidades: 2: básicamente consiste en construir elementos en base a la entrada del usuario sin chequeos previos.
+- Code smells: 3 son por inconsistencias en el nombrado de las variables, 3 por un correcto formateo al realizar concatenaciones de strings y alguna de refactorización
+	
+**products-service:**
+- code smalls: 6: problemas al formatear concatenados de strings, definición de un strings 3 veces en vez de reutilizarlo, generalizar el tipos de variable utilizando tipos de variable no tan específicos, otros
+
+**shipping-service:**
+- 8 code smells: en general es una reiteración de problemas ya vistos en los servicios anteriores.
+	 
+**Webapp (frontend):** 
+- 4 code smels, 3 para limpiar el código por importaciones de librerías que no se usan y una recomendación para hacer el código más entendible y mantenible.
+
+	
+**Recomendaciones:**
+	
+- El cubrimiento de código es de 0% para todos los repositorios. Habría que establecer alguna medida mínima para que se realicen test que hagan cubrimiento de código.
+- Setear quality gates en la herramienta para mejorar la calidad del código.
+- Que los programadores hagan uso de las soluciones que recomienda la herramienta, ya que en muchos casos muestra el detalle de como implementar la solución al problema encontrado.
+- Hacer code review perídicas con programadores de mayor seniority evidenciando y solucionando los problemas más frecuentes de manera de evitar futuros problemas
+- Evitar hacer copy-paste de servicios que ya tienen problemas. Hay algunos problemas recurrentes entre varios servicios de BE, hay que evitar seguir propagando errores o malas prácticas realizando "copy-paste" de código con métricas deficientes.
+
 
 ## Planificación y seguimiento de tareas
 
