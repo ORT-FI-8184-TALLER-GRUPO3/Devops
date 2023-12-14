@@ -238,7 +238,7 @@ vulnerabilidades: 2: básicamente consiste en construir elementos en base a la e
 En el contexto de DevOps, la automatización y la integración del testing se convierten en elementos clave. Este enfoque garantiza la ejecución sistemática de pruebas en los desarrollos recientes, proporcionándonos un feedback continuo y rápido sobre el trabajo. 
 La automatización no solo actúa como un test de regresión para el código existente, sino que también fortalece la confianza en el proceso de despliegue. Confiamos en que el testing actúe como un escudo protector, evitando la introducción de problemas no deseados en el entorno de producción.
 
-Dado el tipo de software y código con el cual se trabajo evaluamos realizar pruebas de Integración sobre los micro servicios de backend específicamente pruebas de endpoint.
+Dado el tipo de software y codigo con el cual se trabajo evaluamos realizar pruebas de Integración sobre los micro servicios de backend específicamente pruebas de endpoint.
 Las pruebas de integración verifican que los diferentes componentes o módulos de una aplicación funcionen correctamente cuando se integran. Garantizan la coherencia y la interacción adecuada entre las partes del sistema.
 
 Las pruebas de endpoint se realizan para validar la comunicación adecuada entre las diversas partes de una aplicación o sistema. Esto incluye verificar que los endpoints de la API respondan correctamente a las solicitudes, manejen los parámetros de entrada correctamente y devuelvan los resultados esperados.
@@ -253,7 +253,7 @@ Para el ejemplo planteado pudimos detectar la falla-error 500 para el servicio d
 </p>
 <br>
 
-A medida que avanzaba el proyecto, nos enfrentamos a desafíos que ralentizaron en el avance de esta parte del proyecto, logramos completar el testing para el microservicio orders-service, y pudimos llegar a los siguientes resultados.
+A medida que avanzaba el proyecto, nos enfrentamos a desafíos que ralentizaron en el avance de esta parte del proyecto, logramos completar el testing para el microservicio orders-service, y pudimos llegar a los anteriores resultados.
 Es importante señalar que no fue posible incorporar estas pruebas en el flujo de trabajo de CI/CD, sin embargo incluimos un workflow en github actions dentro del repositorio de orders-service que puede ser ejecutado manualmente y permite obtener resultados.
 
 ## Gestión del proyecto
