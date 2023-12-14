@@ -31,21 +31,27 @@ Tutor: Lic. Federico Barcelo
 
 ## Abstract
 
+
 Se establece como objetivo primordial mejorar la agilidad en el desarrollo y la calidad del software, asegurando simultáneamente una mayor eficiencia operativa. La estrategia propuesta permitirá a la empresa mantener su competitividad en un mercado dinámico y en constante evolución.
 
 El equipo multidisciplinario encargado de liderar la implementación de DevOps en áreas clave como desarrollo, control de calidad y operaciones, se embarcará en la exploración de estrategias avanzadas de automatización y escalabilidad en la nube. Este enfoque no solo promete acelerar la entrega de software, sino también garantizar la fiabilidad y flexibilidad necesarias para adaptarse a las cambiantes demandas del mercado.
 
+
 ## Presentación del cliente y la problemática
+
 
 La problemática principal de esta empresa en el sector retail radica en la necesidad urgente de adaptarse constantemente y entregar eficientemente software para mantenerse competitiva en un mercado en constante cambio. La entrega de software in-house actual no cumple con los requisitos de velocidad y calidad necesarios para enfrentar los desafíos del entorno dinámico del retail.
 
 Por parte de la directiva se propuso la implementación de un modelo DevOps como solución para acelerar el "time-to-market" y mejorar la calidad del software, aprovechando al máximo las ventajas de la nube. Esta estrategia busca no solo mejorar la agilidad en el desarrollo y la calidad del software, sino también lograr una mayor eficiencia operativa para mantener la competitividad.
 
 
+
 ## Solución planteada ante la problemática
 **Puntos clave**
 
+
 Desmenuzando el objetivo central planteado en el Abstract, el equipo se plantea las siguientes metas específicas:
+
 
 1. Implementar la infraestructura en la plataforma de nube de AWS, utilizando para ello la herramienta Terraform (IaC).
 2. Desarrollar un proceso integral de integración continua y entrega continua (CI/CD).
@@ -54,25 +60,31 @@ Desmenuzando el objetivo central planteado en el Abstract, el equipo se plantea 
 5. Desplegar aplicación frontend sobre el servicio S3 bucket de AWS.
 6. Mantener una eficiencia óptima en las prácticas de las metodologías ágiles, con el fin de ofrecer una solución que potencie tanto la calidad como la velocidad de los procesos.
 
+
 ### Arquitectura de la Solución
+
 
 Se elgió una solución desplegada en la nube que permite satisfacer los requerimeintos planteados, y para este caso se eligió la nube AWS dabido a que es una de las tres más importantes y que los integrantes del equipo estaban familiarizados con la misma. En particular se decidió utilizar un modelo de servicio PaaS para acelerar el despliegue de la infraestructura así como también traspasar al proveedor de nube parte de la carga administrativa asociado.
 La implementación en AWS fue realizada mediante el servicio ECS (Elastic Containter Service) con lanzamiento utilizando la modalidad FARGATE (Serverless).
 Se generaron 3 ambientes distintos (desarrolo, testing y producción)
 A continuación se muestra un diagrama que muestra el despliegue de cada uno de los microservicios de Back-end por cada ambiente.
 
+
 <p align = "center">
 <img src = "./extras/Arquitectura_deploy_aws_ms.svg" width=100%>
 </p>
+
 
 Los componentes son los siguientes:
 Se generó una VPC en la region us-east-1 por cada ambiente con dos subredes públicas en distintas areas de disponibilidad (us-east-1a y us-east-1b). Estos recursos son compartidos por todos los contenedores de backend en cada ambiente.
 La salida a internet desde la VPC se realiza con un Internet Gateway en conjunto con una tabla de ruteo. Para cada ambiente se generó un Cluster de ECS y luego para cada microservicio desplegado se genera un Application Load Balancer que permite balancear la carga entre las dos subredes, así como también proveer de una IP pública para el acceso desde internet. La cantidad de instancias de contenedor desplegadas se puede especificar por ambiente y se seteo inicialmente en 2 para el ambiente de producción, donde tiene sentido aplicar el balanceo de carga y se asegura una alta disponibilidad y en 1 para los ambientes de desarrollo y testing. Si bien no tiene mucho sentido aplicar el balanceador de carga hacia una unica instancia de todos modos es util por la utilización de las IP públicas para resolver la dependencia del MS de orders.
 Como elemento complementario para el despliegue dentro de la nube y de interacción con pipelines de CI/CD se generaron los recursos de ECR (Elastic Container Registry) y se optó por utilizar uno por cada servicio. Esto permite mantener una independencia entre MS y facilita la utlización de tags para las imagenes subidas a los mismos. En cada uno de estos registros se va a utilizar un tag por cada ambiente y quedan representados de esta manera en la infraestructura:
 
+
 <p align = "center">
 <img src = "./extras/ECRporMS.svg" width=100%>
 </p>
+
 
 Por último también se generaró la infraestructura para desplegar el frontend para lo cual se utilizó un S3 Bucket por ambiente. La elección se debe a que el contenido a desplegar es estático y utilizar un S3 Bucket público es una manera económica de permitir su consumo y evitar soluciones más complejas como levantar una instancia de EC2 con un webserver o algún contenedor en ECS, y de alguna manera también trasferir el costo adminsitrativo de mantener el contenido en linea.  
  
@@ -101,6 +113,7 @@ Solamente vale la pena comentar algunas de estas variables, por ejemplo "creoECR
 Los archivos de iac se encuentran dentro de un único directorio llamado iac-terraform dentro del repositorio Devops.
 
 
+
 ### Estrategia para CI/CD 
 
 <p align = "center">
@@ -108,6 +121,7 @@ Los archivos de iac se encuentran dentro de un único directorio llamado iac-ter
 </p>
 
 **Backend**
+
 
 El proceso de integración y despliegue continuo fue realizado mediante **GitHub Actions** e implementado en el repositorio de **DevOps**, de esta manera centraliza y estandariza el ciclo de vida del software de los microservicios del backend. Esta arquitectura de CI/CD permite a cada microservicio del backend invocar un workflow genérico **"cicd-generic.yml"**, ya que su lógica es similar pero a su vez proporcionando parámetros específicos que adaptan la ejecución a sus necesidades individuales.
 
@@ -117,9 +131,11 @@ Esta estrategia desacopla el proceso de CI/CD de los repositorios individuales d
 
 La automatización del pipeline fomenta la eficiencia y la cohesión entre los equipos, reduciendo la redundancia y los errores manuales, y promoviendo un ambiente de trabajo más ágil y enfocado en la entrega de valor continuo. Con esta implementación, se abraza el espíritu de DevOps de colaboración y mejora continua, mientras se mantiene una infraestructura robusta y adaptable a los cambios rápidos y constantes del desarrollo de software moderno. A continuación se presenta un diagrama del pipeline:
 
+
 <p align = "center">
 <img src = "./extras/devop-flow-backend.png" width=100%>
 </p>
+
 
 **Frontend**
 
@@ -164,7 +180,7 @@ Se evidencia el uso de feature branch en el repositorio de Devops:
 <img src = "./extras/feature-branch.jpg" width=100%>
 </p>
 
-### Análisis de código estático
+## Análisis de código estático
 
 Dentro del proceso de integración y entrega continua (CI/CD) se consideró esencial incorporar prácticas de aseguramiento de la calidad del código. En este contexto, se seleccionó **SonarCloud** como la herramienta de análisis de código estático por excelencia en nuestro proyecto académico ya que SonarCloud se integra de forma eficiente con **GitHub Actions**, lo que permite una ejecución automática del análisis de código estático con cada push o pull request en el ciclo de vida del desarrollo. 
 
@@ -176,7 +192,7 @@ Esta herramienta proporciona un dashboard intuitivo que muestra de manera clara 
 <img src = "./extras/SonarCloud.png" width=100%>
 </p>
 
-#### Interpretación de los resultados de SonarCloud
+### Interpretación de los resultados de SonarCloud
 
 Se procedió a leer los informes que genera la herramienta de análisis estático de código.
 A continuación, se muestra un resumen de los hallazgos de la herramienta en cada uno de los repositorios y que se califican en cuatro categorías: Buh, code smells, vulnerabildiades y security hotspots.
@@ -209,8 +225,13 @@ vulnerabilidades: 2: básicamente consiste en construir elementos en base a la e
 - Hacer code review perídicas con programadores de mayor seniority evidenciando y solucionando los problemas más frecuentes de manera de evitar futuros problemas
 - Evitar hacer copy-paste de servicios que ya tienen problemas. Hay algunos problemas recurrentes entre varios servicios de BE, hay que evitar seguir propagando errores o malas prácticas realizando "copy-paste" de código con métricas deficientes.
 
+## Resultados de las tareas de testing
 
-## Planificación y seguimiento de tareas
+
+
+## Gestión del proyecto
+
+### Planificación y seguimiento de tareas
 
 En el marco del proyecto, se implementó la metodología ágil a través del uso de un **tablero Kanban** para el seguimiento de las tareas asignadas a cada integrante del equipo. Para la gestión y organización de estas tareas se optó por utilizar **Trello**, una herramienta que, a pesar de sus limitaciones en la creación de subtareas, proporciona una interfaz intuitiva y fácil de manejar que favorece la colaboración y el seguimiento en tiempo real del progreso del trabajo.
 
@@ -240,4 +261,5 @@ El uso del tablero Kanban en Trello también permitió al equipo visualizar el f
 <p align = "center">
 <img src = "./extras/Semana4.png" width=100%>
 </p>
+
 
