@@ -34,23 +34,23 @@ jobs:
           if [ "${{env.REPO_NAME}}" != "orders-service" ]; then
               gh repo clone ORT-FI-8184-TALLER-GRUPO3/${{env.REPO_NAME}}          
               mvn -f ${{env.REPO_NAME}}/ -B package
-              java -jar ${{env.REPO_NAME}}/target/${{env.REPO_NAME}}.jar --server.port=8081
+              java -jar ${{env.REPO_NAME}}/target/${{env.REPO_NAME}}.jar --server.port=8081 &
           else
               gh repo clone ORT-FI-8184-TALLER-GRUPO3/products-service           
               mvn -f products-service/ -B package
-              java -jar products-service/target/products-service-0.0.1-SNAPSHOT.jar --server.port=8081
+              java -jar products-service/target/products-service-0.0.1-SNAPSHOT.jar --server.port=8081 &
 
               gh repo clone ORT-FI-8184-TALLER-GRUPO3/shipping-service           
               mvn -f shipping-service/ -B package
-              java -jar shipping-service/target/shipping-service-0.0.1-SNAPSHOT.jar --server.port=8082
+              java -jar shipping-service/target/shipping-service-0.0.1-SNAPSHOT.jar --server.port=8082 &
 
               gh repo clone ORT-FI-8184-TALLER-GRUPO3/payments-service           
               mvn -f payments-service/ -B package
-              java -jar payments-service/target/payments-service-0.0.1-SNAPSHOT.jar --server.port=8083
+              java -jar payments-service/target/payments-service-0.0.1-SNAPSHOT.jar --server.port=8083 &
 
               gh repo clone ORT-FI-8184-TALLER-GRUPO3/${{env.REPO_NAME}}
               mvn -f ${{env.REPO_NAME}}/ -B package
-              java -jar ${{env.REPO_NAME}}/target/${{env.REPO_NAME}}-0.0.1-SNAPSHOT.jar ${{ env.APP_ARGS }} --server.port=8084
+              java -jar ${{env.REPO_NAME}}/target/${{env.REPO_NAME}}-0.0.1-SNAPSHOT.jar ${{ env.APP_ARGS }} --server.port=8084 &
           fi    
 
       - name: Install Postman CLI
