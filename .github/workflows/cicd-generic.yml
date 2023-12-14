@@ -26,7 +26,7 @@ jobs:
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       
- RunsBackendTest:
+  RunsBackendTest:
    needs: SonarAnalysis
    uses: ./.github/workflows/backend-testing.yml
     
