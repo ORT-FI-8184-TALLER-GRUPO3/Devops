@@ -20,8 +20,8 @@ Entregado como requisito para la obtención de la certificación en Devops.
 
 
 
-Rafael <br>
-Maximiliano<br>
+Rafael Fernández -<br>
+Maximiliano Migues - 205973<br>
 Matias Techeira - 176519<br>
 
 Tutor: Lic. Federico Barcelo
@@ -49,10 +49,11 @@ Por parte de la directiva se propuso la implementación de un modelo DevOps como
 Desmenuzando el objetivo central planteado en el Abstract, el equipo se plantea las siguientes metas específicas:
 
 1. Implementar la infraestructura en la plataforma de nube de AWS, utilizando para ello la herramienta Terraform (IaC).
-2. Incorporar pruebas automáticas y análisis de código estático (SonarCloud).
-3. Desarrollar un proceso integral de integración continua y entrega continua (CI/CD).
-4. Gestionar microservicios empaquetados en contenedores, para su despliegue en un sistema de orquestación en la nube de AWS, específicamente utilizando imágenes Docker en ECS Fargate.
-5. Mantener una eficiencia óptima en las prácticas de las metodologías ágiles, con el fin de ofrecer una solución que potencie tanto la calidad como la velocidad de los procesos.
+2. Desarrollar un proceso integral de integración continua y entrega continua (CI/CD).
+3. Incorporar pruebas automáticas y análisis de código estático (SonarCloud).
+4. Gestionar microservicios empaquetados de backend en contenedores, para su despliegue en un sistema de orquestación en la nube de AWS, específicamente utilizando imágenes Docker en ECS Fargate.
+5. Desplegar aplicación frontend sobre el servicio S3 bucket de AWS.
+6. Mantener una eficiencia óptima en las prácticas de las metodologías ágiles, con el fin de ofrecer una solución que potencie tanto la calidad como la velocidad de los procesos.
 
 ## Estrategia de ramas
 
