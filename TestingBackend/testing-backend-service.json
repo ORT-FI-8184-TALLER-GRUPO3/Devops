@@ -11,9 +11,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8888/products",
+					"raw": "http://localhost:8081/products",
 					"host": [
-						"http://localhost:8888"
+						"http://localhost:8081"
 					],
 					"path": [
 						"products"
@@ -28,9 +28,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8888/products/123",
+					"raw": "http://localhost:8081/products/123",
 					"host": [
-						"http://localhost:8888"
+						"http://localhost:8081"
 					],
 					"path": [
 						"products",
@@ -55,9 +55,9 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/orders",
+					"raw": "http://localhost:8084/orders",
 					"host": [
-						"http://localhost:8080"
+						"http://localhost:8084"
 					],
 					"path": [
 						"orders"
@@ -72,9 +72,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8887/shipping/c",
+					"raw": "http://localhost:8082/shipping/c",
 					"host": [
-						"http://localhost:8887"
+						"http://localhost:8082"
 					],
 					"path": [
 						"shipping",
