@@ -139,8 +139,12 @@ La automatización del pipeline fomenta la eficiencia y la cohesión entre los e
 
 **Frontend**
 
-Al igual que backend el flujo de integracion se realiza a traves de **GitHub Actions**, el cual es implementado en el repositorio **DevOps**.
-El mismo se desarrolla al invocar un workflow para cada ambiente: **workflow-dev.yml**, **workflow-test.yml** y **workflow-prod.yml**, es decir que al detectar un pedido de 'pull request' o 'push' sobre el repositorio del frontend, este procede a realizar el proceso CI.
+Se ha implementado una estrategia que centraliza y estandariza el ciclo de vida del software de los microservicios en un lugar y al igual que backend el flujo de integracion se realiza a traves de **GitHub Actions**, el cual es implementado en el repositorio **DevOps**.
+
+Sin embargo a diferencia de la estrategia aplicada en el anterior punto, el proceso se desarrolla al invocar un workflow para cada ambiente: **workflow-dev.yml**, **workflow-test.yml**, y **workflow-prod.yml**. A su vez, dentro del repositorio contamos con archivo que funciona como llamador ('caller') el cual se dispara una vez que se detecta un cambio a través de 'pull request' ó 'push'.
+
+Durante el desarrollo del proyecto, nos hemos enfrentado a desafíos que no nos permitieron el abordaje el frontend de acuerdo al enfoque propuesto por nosotros (integración y despliegue en un único lugar), reconocemos que este aspecto necesita una atención más detallada y mejoras para optimizar su funcionamiento.
+
 
 
 
@@ -227,7 +231,21 @@ vulnerabilidades: 2: básicamente consiste en construir elementos en base a la e
 
 ## Resultados de las tareas de testing
 
+En el contexto de DevOps, la automatización y la integración del testing se convierten en elementos clave. Este enfoque garantiza la ejecución sistemática de pruebas en los desarrollos recientes, proporcionándonos un feedback continuo y rápido sobre el trabajo. 
+La automatización no solo actúa como un test de regresión para el código existente, sino que también fortalece la confianza en el proceso de despliegue. Confiamos en que el testing actúe como un escudo protector, evitando la introducción de problemas no deseados en el entorno de producción.
 
+Dado el tipo de software y codigo con el cual se trabajo evaluamos realizar pruebas de Integración sobre los micro servicios de backend específicamente pruebas de endpoint.
+Las pruebas de integración verifican que los diferentes componentes o módulos de una aplicación funcionen correctamente cuando se integran. Garantizan la coherencia y la interacción adecuada entre las partes del sistema.
+
+Las pruebas de endpoint se realizan para validar la comunicación adecuada entre las diversas partes de una aplicación o sistema. Esto incluye verificar que los endpoints de la API respondan correctamente a las solicitudes, manejen los parámetros de entrada correctamente y devuelvan los resultados esperados.
+
+De las pruebas realizadas pudimos detectar las siguientes resultados(imagen debajo).
+
+
+
+<p align = "center">
+<img src = "./extras/backend_testing.png" width=100%>
+</p>
 
 ## Gestión del proyecto
 
