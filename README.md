@@ -145,9 +145,6 @@ Se ha implementado una estrategia que centraliza y estandariza el ciclo de vida 
 
 Sin embargo a diferencia de la estrategia aplicada en el anterior punto, el proceso se desarrolla al invocar un workflow para cada ambiente: **workflow-dev.yml**, **workflow-test.yml**, y **workflow-prod.yml**. A su vez, dentro del repositorio contamos con archivo que funciona como llamador ('caller') el cual se dispara una vez que se detecta un cambio a través de 'pull request' ó 'push'.
 
-Durante el desarrollo del proyecto, nos hemos enfrentado a desafíos que no nos permitieron el abordaje el frontend de acuerdo al enfoque propuesto por nosotros (integración y despliegue en un único lugar), reconocemos que este aspecto necesita una atención más detallada y mejoras para optimizar su funcionamiento.
-
-
 
 <br>
 <p align = "center">
