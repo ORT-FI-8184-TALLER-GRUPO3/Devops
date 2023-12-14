@@ -84,9 +84,9 @@ Esto nos ayuda a garantizar una entrega continua de software de alta calidad, ma
 
 **Backend**
 
-El proceso de integración y despliegue continuo implementado en el repositorio de DevOps centraliza y estandariza el ciclo de vida del software de los microservicios del backend. Esta arquitectura de CI/CD permite a cada microservicio del backend invocar un workflow genérico, ya que su lógica es similar pero a su vez proporcionando parámetros específicos que adaptan la ejecución a sus necesidades individuales.
+El proceso de integración y despliegue continuo fue realizado mediante **GitHub Actions** e implementado en el repositorio de **DevOps**, de esta manera centraliza y estandariza el ciclo de vida del software de los microservicios del backend. Esta arquitectura de CI/CD permite a cada microservicio del backend invocar un workflow genérico **"cicd-generic.yml"**, ya que su lógica es similar pero a su vez proporcionando parámetros específicos que adaptan la ejecución a sus necesidades individuales.
 
-La utilización de un workflow genérico para el backend facilita la gestión del código y la infraestructura, permitiendo actualizaciones y mejoras centralizadas que se propagan automáticamente a todos los microservicios del backend. Los microservicios, a través de sus respectivos repositorios, hacen uso de un archivo 'caller.yml', que activa el workflow genérico. Este 'caller' es un manifiesto que, al detectar cambios en el código como nuevos 'push' o 'pull requests', envía la información relevante al workflow centralizado en DevOps.
+La utilización de un workflow genérico para el backend facilita la gestión del código y la infraestructura, permitiendo actualizaciones y mejoras centralizadas que se propagan automáticamente a todos los microservicios del backend. Los microservicios, a través de sus respectivos repositorios, hacen uso de un archivo **'caller.yml'**, que activa el workflow genérico. Este 'caller' es un manifiesto que, al detectar cambios en el código como nuevos 'push' o 'pull requests', envía la información relevante al workflow centralizado en DevOps.
 
 Esta estrategia desacopla el proceso de CI/CD de los repositorios individuales de los microservicios y centraliza la lógica de integración y despliegue en un único lugar. Al proteger la lógica dentro del repositorio de DevOps, se asegura la integridad del flujo de trabajo e idealmente simplifica la gestión de los secretos y configuraciones (vale aclarar, que inicialmente no se tenía ésta estructura y se utilizaba los secretos en cada repositorio individual, al transformar y mudar el flujo de trabajo, se decidio utilizar secrets: inherit en los llamadores para pasarle dicha información al workflow reutilizable ya que no se disponía de mucho tiempo extra para ajustar, pero entendemos que para que la coherencia exista en este tipo de solución, dichos secretos se tendrían que haber mudado al repositorio de Devops por cuestiones de escalabilidad y seguridad). Además, esta abstracción permite que los equipos de desarrollo se enfoquen en el desarrollo de características y correcciones, confiando en que el proceso de CI/CD se maneja de manera consistente y segura desde un solo punto de control.
 
@@ -94,6 +94,14 @@ La automatización del pipeline fomenta la eficiencia y la cohesión entre los e
 
 <p align = "center">
 <img src = "./extras/devop-flow-backend.png" width=100%>
+</p>
+
+## Análisis de código estático
+
+Dentro del proceso de integración y entrega continua (CI/CD) se consideró esencial incorporar prácticas de aseguramiento de la calidad del código. En este contexto, se seleccionó **SonarCloud** como la herramienta de análisis de código estático por excelencia en nuestro proyecto académico ya que SonarCloud se integra de forma eficiente con **GitHub Actions**, lo que permite una ejecución automática del análisis de código estático con cada push o pull request en el ciclo de vida del desarrollo. Esta integración es clave en el flujo de trabajo de DevOps, ya que promueve la identificación rápida de problemas y la retroalimentación continua, facilitando así la entrega de software de alta calidad. Una consideración a resaltar de SonarCloud fue que su modelo de uso gratuito, exige que los repositorios sean públicos. Aunque esto podría ser una restricción para proyectos que manejan información sensible, en el contexto de nuestro proyecto académico, donde la transparencia y la colaboración son fundamentales, este requisito no representa un inconveniente. Esta herramienta proporciona un dashboard intuitivo que muestra de manera clara las métricas de calidad, lo que facilita su interpretación y permite tomar acciones correctivas de manera informada y ágil. Su utilización contribuye a elevar los estándares de calidad del software desarrollado y a formar desarrolladores conscientes de las mejores prácticas de codificación. A continuación se evidencia dicho dashboard:
+
+<p align = "center">
+<img src = "./extras/SonarCloud.png" width=100%>
 </p>
 
 ## Planificación y seguimiento de tareas
