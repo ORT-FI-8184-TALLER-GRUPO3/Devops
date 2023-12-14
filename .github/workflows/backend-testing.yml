@@ -40,32 +40,32 @@ jobs:
               cd ..
           else
               gh repo clone ORT-FI-8184-TALLER-GRUPO3/products-service 
-              ls
-              cd products-service          
-              ls
               mvn -f products-service/ -B package
               java -jar products-service/target/products-service.jar --server.port=8081sleep 5
-              cd .. 
 
-              gh repo clone ORT-FI-8184-TALLER-GRUPO3/shipping-service    
-              cd shipping-service       
+              gh repo clone ORT-FI-8184-TALLER-GRUPO3/shipping-service        
               mvn -f shipping-service/ -B package
               java -jar shipping-service/target/shipping-service.jar --server.port=8082sleep 5
-              cd ..
 
               gh repo clone ORT-FI-8184-TALLER-GRUPO3/payments-service   
               cd payments-service
               mvn -f payments-service/ -B package
               java -jar payments-service/target/payments-service.jar --server.port=8083sleep 5
-              cd ..
 
               gh repo clone ORT-FI-8184-TALLER-GRUPO3/${{env.REPO_NAME}}
               cd ${{env.REPO_NAME}}
               mvn -f ${{env.REPO_NAME}}/ -B package
-              java -jar ${{env.REPO_NAME}}-service/target/${{env.REPO_NAME}}-service.jar ${{ env.APP_ARGS }} --server.port=8084sleep 5
-              cd ..
+              java -jar ${{env.REPO_NAME}}-service/target/${{env.REPO_NAME}}-service.jar ${{ env.APP_ARGS }} --server.port=8084
           fi    
-
+      - name: control
+        run: |
+          CONTAINER_NAME=$(docker ps -q --filter "ancestor=nombre-de-tu-imagen" --format "{{.Names}}")
+          echo "Nombre del contenedor: $CONTAINER_NAME"
+          docker exec -it $CONTAINER_NAME curl -s http://localhost:8885/health
+          docker exec -it $CONTAINER_NAME curl -s http://localhost:8886/health
+          docker exec -it $CONTAINER_NAME curl -s http://localhost:8887/health
+          docker exec -it $CONTAINER_NAME curl -s http://localhost:8888/health
+      
       - name: Install Postman CLI
         run: curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
 
