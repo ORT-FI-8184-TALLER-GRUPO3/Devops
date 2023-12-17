@@ -1,0 +1,23 @@
+name: Caller CI/CD Workflow
+
+on:
+  push:
+    branches:
+      - dev
+      - test
+      - prod
+  pull_request:
+    branches:
+      - dev
+      - test
+      - prod
+
+jobs:
+  ReuseableJobForCICD:
+    uses: ORT-FI-8184-TALLER-GRUPO3/Devops/.github/workflows/cicd-generic.yml@main
+    with:
+      pom_path: 'pom.xml'
+      service: 'shipping-service'
+      target: ${{ github.ref_name }}
+      SONAR_PROJECT:  ${{ vars.SONAR_PROJECT }}
+    secrets: inherit
