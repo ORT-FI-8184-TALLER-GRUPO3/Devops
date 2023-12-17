@@ -11,7 +11,7 @@ resource "aws_ecs_task_definition" "payments-task-def" {
 [
   {
     "name": "payments-service",
-    "image": "${var.aws_account_id}.dkr.ecr.us-east-1.amazonaws.com/ecr-payments-service:payments-service-dev",
+    "image": "${var.aws_account_id}.dkr.ecr.us-east-1.amazonaws.com/ecr-payments-service:payments-service-${var.environment_prefix}",
     "essential": true,
     "portMappings": [
       {
@@ -44,7 +44,7 @@ resource "aws_ecs_task_definition" "shipping-task-def" {
 [
   {
     "name": "shipping-service",
-    "image": "${var.aws_account_id}.dkr.ecr.us-east-1.amazonaws.com/ecr-shipping-service:shipping-service-dev",
+    "image": "${var.aws_account_id}.dkr.ecr.us-east-1.amazonaws.com/ecr-shipping-service:shipping-service-${var.environment_prefix}",
     "essential": true,
     "portMappings": [
       {
@@ -77,7 +77,7 @@ resource "aws_ecs_task_definition" "products-task-def" {
 [
   {
     "name": "products-service",
-    "image": "${var.aws_account_id}.dkr.ecr.us-east-1.amazonaws.com/ecr-products-service:products-service-dev",
+    "image": "${var.aws_account_id}.dkr.ecr.us-east-1.amazonaws.com/ecr-products-service:products-service-${var.environment_prefix}",
     "essential": true,
     "portMappings": [
       {
@@ -111,7 +111,7 @@ resource "aws_ecs_task_definition" "orders-task-def" {
 [
   {
     "name": "orders-service",
-    "image": "${var.aws_account_id}.dkr.ecr.us-east-1.amazonaws.com/ecr-orders-service:orders-service-dev",
+    "image": "${var.aws_account_id}.dkr.ecr.us-east-1.amazonaws.com/ecr-orders-service:orders-service-${var.environment_prefix}",
     "essential": true,
     "environment" : [
         { "name": "APP_ARGS", "value": "http://${aws_lb.payments.dns_name} http://${aws_lb.shipping.dns_name} http://${aws_lb.products.dns_name}" }
