@@ -46,6 +46,10 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file ${{ inputs.pom_path }} -DskipTests
 
+    - name: hago cat para ver info del cpu
+      working-directory: ./
+      run: |
+        cat /proc/cpuinfo
 
     # Configurar AWS Credentials
     - name: Configure AWS credentials
